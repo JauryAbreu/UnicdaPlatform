@@ -1,0 +1,175 @@
+﻿@page
+@model UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Users.PermissionInformationModel
+@{
+    ViewBag.Title = "Permission Information";
+    Layout = "~/Areas/Identity/Pages/Account/Manage/Administrator/_AdmLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="cont-all">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="tit-general">ASIGNACION DE PERMISOS</h1>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card shadow mb-4">
+
+                    <div class="card-header py-3">
+                        <div class="d-sm-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-black">Permisos</h6>
+                        </div>
+                    </div>
+                    <form method="post">
+                        <div class="card-body form-vehiculo">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+
+                                        <input asp-for="Input.GroupId" type="text" autocomplete="off" hidden>
+                                        <label for="">Inicio Detallado</label>
+                                        <select class="form-select" asp-for="Input.Main" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Vehiculos</label>
+                                        <select class="form-select" asp-for="Input.Item" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Clientes</label>
+                                        <select class="form-select" asp-for="Input.Customer" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Socios</label>
+                                        <select class="form-select" asp-for="Input.Affiliate" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Ventas</label>
+                                        <select class="form-select" asp-for="Input.Transaction" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Cierre</label>
+                                        <select class="form-select" asp-for="Input.Batch" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Gastos</label>
+                                        <select class="form-select" asp-for="Input.Expenses" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Ingresos</label>
+                                        <select class="form-select" asp-for="Input.Income" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Cuenta Bancaria</label>
+                                        <select class="form-select" asp-for="Input.Account" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Modulo Fiscal</label>
+                                        <select class="form-select" asp-for="Input.Fiscal" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Perfil de Usuario</label>
+                                        <select class="form-select" asp-for="Input.Profile" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Reportes</label>
+                                        <select class="form-select" asp-for="Input.Report" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Usuarios</label>
+                                        <select class="form-select" asp-for="Input.User" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Empresa</label>
+                                        <select class="form-select" asp-for="Input.Company" aria-label="">
+                                            <option value="true">Activo</option>
+                                            <option value="false">Inactivo</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px;">
+
+                                    <span asp-validation-for="ErrorMessage" class="text-danger"></span>
+                                    <button class="btn btn-sm btn-success shadow-sm"
+                                            type="submit" onclick="return confirm('Seguro que desea guardar los permisos?')"
+                                            style="font-size: 16px; ">
+                                        <i class="nav-link-icon fa fa-save"> </i> GUARDAR
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,755 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" href="~/img/car.png">
+
+    <title>@Model.Header - @Model.CompanyName</title>
+
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100;400;500&display=swap" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.0/css/buttons.dataTables.min.css" />
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    <style>
+        .input-container input {
+            border: none;
+            box-sizing: border-box;
+            outline: 0;
+            padding: .75rem;
+            position: relative;
+            width: 100%;
+        }
+
+        input[type="date"]::-webkit-calendar-picker-indicator {
+            background: transparent;
+            bottom: 0;
+            color: transparent;
+            cursor: pointer;
+            height: auto;
+            left: 0;
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: auto;
+        }
+    </style>
+</head>
+
+<body id="page-top">
+    <div id="wrapper">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+               asp-area="Identity" asp-page="/Account/Manage/Administrator/Index">
+                <div class="sidebar-brand-text mx-3">
+                    <img class="logo-nj" src="@Model.Picture" asp-append-version="true">
+                </div>
+
+            </a>
+            <hr class="sidebar-divider my-0">
+            <li class="nav-item active">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Administrator/Index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Items/Details"
+                   data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <span>Vehículos</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemInformation">Ingresar Nuevo</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemDetails">Propietarios Disponibles.</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemAffiliateInformation">Ingresar Soc. Nuevo</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemAffiliateDetails">Socios Disponibles</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemToBeatDetails">Proximos a Vencer</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/CompletedDetails">Vendidos</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/CompletedAffiliateDetails">Vendidos Socios</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/DepartmentDetails">Marca y Modelo</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Invoice"
+                   data-toggle="collapse" data-target="#collapsefacturacion"
+                   aria-expanded="true" aria-controls="collapsefacturacion">
+                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <span>Facturación</span>
+                </a>
+                <div id="collapsefacturacion" class="collapse" aria-labelledby="headingfacturacion" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/TransactionInformation">Ventas</a>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/CreditMemoInformation">Devolucion</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/QuoteInformation">Cotizacion</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/TransactionDetails">Realizadas</a>
+
+                        @*<a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Expensive">Otros gastos</a>
+                    <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Details">Historial</a>*@
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Administrator/Customers/CustomerDetails">
+                    <i class="fas fa-fw fa-briefcase"></i>
+                    <span>Clientes</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Administrator/Affiliates/AffiliateDetails">
+                    <i class="fas fa-fw fa-user"></i>
+                    <span>Socios</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Finanzas
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Accounts/AccountDetails"
+                   data-toggle="collapse" data-target="#collapseAccount"
+                   aria-expanded="true" aria-controls="collapseAccount">
+                    <i class="fas fa-fw fa-user-alt"></i>
+                    <span>Cuenta Contable</span>
+                </a>
+                <div id="collapseAccount" class="collapse" aria-labelledby="headingAccount" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Accounts/AccountInformation">Ingresar Cuenta</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Accounts/AccountDetails">Disponible</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Accounts/AccountTransactionDetails">Diario General</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Accounts/AccountCapitalInformation">Deposito de Capital</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Accounts/AccountTransferInformation">Transferencias Internas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Accounts/AccountCxCInformation">Cuentas por Cobrar</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Accounts/AccountCxPInformation">Cuentas por Pagar</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Reports/Report607Details"
+                   data-toggle="collapse" data-target="#collapseReport"
+                   aria-expanded="true" aria-controls="collapseReport">
+                    <i class="fas fa-fw fa-chart-area"></i>
+                    <span>Reportes</span>
+                </a>
+                <div id="collapseReport" class="collapse" aria-labelledby="headingReporte" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Reports/Report606Details">606</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Reports/Report607Details">607</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Reports/ReportIR2Details">IR2</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Reports/ReportProfit">Beneficio</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Reports/ReportProfitDetails">Beneficio Detallado</a>
+                    </div>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Expenses/ExpenseListInformation"
+                   data-toggle="collapse" data-target="#collapseExpense"
+                   aria-expanded="true" aria-controls="collapseExpense">
+                    <i class="fas fa-fw fa-user-alt"></i>
+                    <span>Gastos</span>
+                </a>
+                <div id="collapseExpense" class="collapse" aria-labelledby="headingExpense" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseListInformation">Ingresar</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseListDetails">Administrativos</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseItemListDetails">Vehiculos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseDetails">Tipos</a>
+                    </div>
+                </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Incomes/IncomeListInformation"
+                   data-toggle="collapse" data-target="#collapseIncome"
+                   aria-expanded="true" aria-controls="collapseIncome">
+                    <i class="fas fa-fw fa-user-alt"></i>
+                    <span>Ingresos</span>
+                </a>
+                <div id="collapseIncome" class="collapse" aria-labelledby="headingIncome" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Incomes/IncomeListInformation">Ingresar</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Incomes/IncomeListDetails">Administrativos</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Incomes/IncomeDetails">Tipos</a>
+                    </div>
+                </div>
+            </li>
+
+
+
+            <li class="nav-item">
+                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Administrator/Fiscals/FiscalDetails">
+                    <i class="fas fa-fw fa-balance-scale"></i>
+                    <span>Configuración Fiscal</span>
+                </a>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="sidebar-heading">
+                Seguridad
+            </div>
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Users/UserDetails"
+                   data-toggle="collapse" data-target="#collapseUser"
+                   aria-expanded="true" aria-controls="collapseUser">
+                    <i class="fas fa-fw fa-user-alt"></i>
+                    <span>Usuarios</span>
+                </a>
+                <div id="collapseUser" class="collapse" aria-labelledby="headingUser" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Users/UserDetails">Usuarios</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Users/UserGroupDetails">Grupos de Permisos</a>
+                    </div>
+                </div>
+            </li>
+            <hr class="sidebar-divider">
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+        </ul>
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <div id="content">
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">@Model.Username</span>
+                                <img class="img-profile rounded-circle"
+                                     src="~/img/undraw_profile.svg">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                 aria-labelledby="userDropdown">
+                                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Profile/ProfileInformation">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Perfil
+                                </a><a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Profile/PasswordInformation">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cambiar Contrase&ntilde;a
+                                </a>
+                                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Companies/CompanyInformation">
+                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Empresa
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" asp-area="Identity" asp-page="/Account/Manage/Logout"
+                                   data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Cerrar sesión
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                @RenderBody()
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; NJ Auto Import @DateTime.Now.Year</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+        <!-- End of Page Wrapper -->
+        <!-- Scroll to Top Button-->
+        <a class="scroll-to-top rounded" href="#page-top">
+            <i class="fas fa-angle-up"></i>
+        </a>
+
+        <!-- Logout Modal-->
+        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+             aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Cerrar Sesion</h5>
+                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">×</span>
+                        </button>
+                    </div>
+                    <div class="modal-body"> Desear terminar la sesion @Model.Username?</div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                        <a class="btn btn-primary" asp-area="Identity" asp-page="/Account/Logout">Salir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JavaScript-->
+        <script src="~/vendor/jquery/jquery.min.js"></script>
+        <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+        <!-- Core plugin JavaScript-->
+        <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+        <!-- Custom scripts for all pages-->
+        <script src="~/js/sb-admin-2.min.js"></script>
+
+        <!-- Page level plugins -->
+        <script src="~/js/chart.js/Chart.min.js"></script>
+
+        <!-- Page level custom scripts -->
+        <script src="~/js/demo/chart-area-demo.js"></script>
+        <script src="~/js/demo/chart-pie-demo.js"></script>
+        <script src="~/js/demo/chart-bar-demo.js"></script>
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://code.highcharts.com/modules/export-data.js"></script>
+        <script src="https://code.highcharts.com/modules/accessibility.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/dataTables.buttons.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.html5.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.7.0/js/buttons.print.min.js"></script>
+
+        <script type="text/javascript">
+            var doughnutChart = document.getElementById('donut-chart-canvas').getContext('2d');
+
+            var myDoughnutChart = new Chart(doughnutChart, {
+                type: 'doughnut',
+                data: {
+                    labels: ["..."],
+                    datasets: [
+                        {
+                            data: [0],
+                            backgroundColor: [
+                                "rgb(255, 255, 255)" // white
+                            ]
+                        }
+                    ]
+                }
+            });
+
+            var monthlyRecapChart = document.getElementById('line-chart-canvas').getContext('2d');
+
+            //Alert(DateTimeFrom);
+            var myMonthlyRecapChart = new Chart(monthlyRecapChart, {
+                type: 'line',
+                data: {
+                    labels: ["..."],
+                    datasets: [{
+                        data: [0],
+                        label: 'Detalles de Ganacias',
+                        fill: true,
+                        borderColor: 'rgb(41, 46, 67)',
+                        tension: 0.2
+                    }]
+                },
+            });
+
+            $(document).ready(function () {
+                //var DateTimeFrom = new Date($('#DateFrom').val());
+                //var DateTimeTo = new Date($('#DateFrom').val());
+                GetGeneralPayments();
+                GetProfitAmount();
+            });
+
+            function GetProfitAmount() {
+                    $.ajax({
+                    type: 'GET',
+                    url: '@Url.Page("Index", "ProfitAmount")',
+                    success: function (data) {
+                        if (data[0] !== null) {
+                            var arrayCategories = data[0].split(";");
+                            var arraySales = data[1].split(";");
+
+                            myMonthlyRecapChart.data.labels = arrayCategories;
+                            myMonthlyRecapChart.data.datasets[0].data = arraySales;
+
+                            if (myMonthlyRecapChart !== undefined) {
+                                myMonthlyRecapChart.update();
+                            }
+                        }
+                    }
+                });
+            }
+
+            function GetGeneralPayments() {
+                $.ajax({
+                    type: 'GET',
+                    url: '@Url.Page("Index", "GeneralPayments")',
+                    success: function (data) {
+                        if (data[0] !== null) {
+                            var arrayCategories = data[0].split(";");
+                            var arraySales = data[1].split(";");
+                            var arrayColor = data[2].split(";");
+
+                            myDoughnutChart.data.labels = arrayCategories;
+                            myDoughnutChart.data.datasets[0].data = arraySales;
+                            myDoughnutChart.data.datasets[0].backgroundColor = arrayColor;
+
+                            if (myDoughnutChart !== undefined) {
+                                myDoughnutChart.update();
+                            }
+                        }
+                    }
+                });
+            }
+        </script>
+
+
+        <script>
+            $(document).ready(function () {
+                $('#dtOrder').DataTable({
+                    "order": [[0, "desc"]]
+                });
+                $('.dataTables_length').addClass('bs-select');
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#dataTable').DataTable({
+
+                    "language":
+                    {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sSearch": "Buscar:",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        },
+                        "buttons": {
+                            "copy": "Copiar",
+                            "colvis": "Visibilidad"
+                        }
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+                                    //to select and search from grid
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        });
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'excel'
+                    ]
+
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#dataTable1').DataTable({
+                    "language":
+                    {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sSearch": "Buscar:",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        },
+                        "buttons": {
+                            "copy": "Copiar",
+                            "colvis": "Visibilidad"
+                        }
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+                                    //to select and search from grid
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        });
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'excel'
+                    ]
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                $('#dataTab').DataTable({
+                    language:
+                    {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sSearch": "Buscar:",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        },
+                        "buttons": {
+                            "copy": "Copiar",
+                            "colvis": "Visibilidad"
+                        }
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+                                    //to select and search from grid
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        });
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'excel'
+                    ],
+                    order: [],
+                    columnDefs: [{
+                        "targets": 'no-sort',
+                        "orderable": false,
+                    }]
+                });
+            });
+        </script>
+
+        <script>
+            $(document).ready(function () {
+                $('#dataTable2').DataTable({
+                    "language":
+                    {
+                        "sProcessing": "Procesando...",
+                        "sLengthMenu": "Mostrar _MENU_ registros",
+                        "sZeroRecords": "No se encontraron resultados",
+                        "sEmptyTable": "Ningún dato disponible en esta tabla",
+                        "sInfo": "Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros",
+                        "sInfoEmpty": "Mostrando registros del 0 al 0 de un total de 0 registros",
+                        "sInfoFiltered": "(filtrado de un total de _MAX_ registros)",
+                        "sSearch": "Buscar:",
+                        "sInfoThousands": ",",
+                        "sLoadingRecords": "Cargando...",
+                        "oPaginate": {
+                            "sFirst": "Primero",
+                            "sLast": "Último",
+                            "sNext": "Siguiente",
+                            "sPrevious": "Anterior"
+                        },
+                        "oAria": {
+                            "sSortAscending": ": Activar para ordenar la columna de manera ascendente",
+                            "sSortDescending": ": Activar para ordenar la columna de manera descendente"
+                        },
+                        "buttons": {
+                            "copy": "Copiar",
+                            "colvis": "Visibilidad"
+                        }
+                    },
+                    initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            var select = $('<select><option value=""></option></select>')
+                                .appendTo($(column.footer()).empty())
+                                .on('change', function () {
+                                    var val = $.fn.dataTable.util.escapeRegex(
+                                        $(this).val()
+                                    );
+                                    //to select and search from grid
+                                    column
+                                        .search(val ? '^' + val + '$' : '', true, false)
+                                        .draw();
+                                });
+
+                            column.data().unique().sort().each(function (d, j) {
+                                select.append('<option value="' + d + '">' + d + '</option>')
+                            });
+                        });
+                    },
+                    dom: 'Bfrtip',
+                    buttons: [
+                        'copy', 'excel'
+                    ]
+                });
+            });
+        </script>
+        <script>
+            $(document).ready(function () {
+                if (document.getElementById("print1").value != "") {
+                    var frm = document.getElementById("print-iframe").contentWindow;
+                    frm.focus();
+                    frm.print();
+                }
+
+                if (document.getElementById("print2").value != "") {
+                    var frm2 = document.getElementById("print-iframe2").contentWindow;
+                    frm2.focus();
+                    frm2.print();
+                }
+
+                if (document.getElementById("print3").value != "") {
+                    var frm3 = document.getElementById("print-iframe3").contentWindow;
+                    frm3.focus();
+                    frm3.print();
+                }
+
+                if (document.getElementById("print4").value != "") {
+                    var frm4 = document.getElementById("print-iframe4").contentWindow;
+                    frm4.focus();
+                    frm4.print();
+                }
+
+                return false;
+            });
+        </script>
+        @await Html.PartialAsync("_notificationPartial")
+
+        @RenderSection("Scripts", required: false)
+</body>
+
+</html>
+

@@ -1,0 +1,108 @@
+﻿@page
+@model UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Users.UserDetailsModel
+@{
+    ViewBag.Title = "Customer Details";
+    Layout = "~/Areas/Identity/Pages/Account/Manage/Administrator/_AdmLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="cont-all">
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="tit-general">USUARIOS</h1>
+        </div>
+        <div class="row">
+            <div id="disponibles" class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <div class="d-sm-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-black">Usuarios Registrados</h6>
+                            <a asp-area="Identity" asp-page="/Account/Manage/Administrator/Users/UserInformation"
+                               class="d-none d-sm-inline-block btn btn-sm btn-blue shadow-sm">
+                            <i class="fas fa-plus fa-sm text-white"></i> Ingresar Usuario</a>
+                        </div>
+
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive tabla-disponible">
+                            @using (Html.BeginForm())
+                            {
+                                <table class="table" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+
+                                            <th>UserId</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Genero</th>
+                                            <th>Correo</th>
+                                            <th>Telefono</th>
+                                            <th>Direccion</th>
+                                            <th></th>
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @if (Model.users.Count > 0)
+                                        {
+                                            @foreach (var term in Model.users)
+                                            {
+                                                <tr style="@(term.Deleted == true ? "background-color:#FAE6E9" : "")">
+                                                    <td>@Html.DisplayFor(IndexModel => term.UserId)</td>
+                                                    <td>@Html.DisplayFor(IndexModel => term.FirstName)</td>
+                                                    <td>@Html.DisplayFor(IndexModel => term.LastName)</td>
+                                                    @if (term.Gender == 0)
+                                                    {
+
+                                                        <td>Hombre</td>
+                                                    }
+                                                    else if (term.Gender == 1)
+                                                    {
+                                                        <td>Mujer</td>
+                                                    }
+                                                    else
+                                                    {
+                                                        <td>Otro</td>
+                                                    }
+                                                    <td>@Html.DisplayFor(IndexModel => term.Email)</td>
+                                                    <td>@Html.DisplayFor(IndexModel => term.Phone)</td>
+                                                    <td>@Html.DisplayFor(IndexModel => term.Address)</td>
+                                                    <td style="text-align:right">
+                                                        <div class="row btn-accion">
+                                                            <div class="dropdown no-arrow">
+                                                                <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink"
+                                                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="fas fa-ellipsis-v fa-md fa-fw text-black"></i>
+                                                                </a>
+                                                                <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
+                                                                     aria-labelledby="dropdownMenuLink">
+                                                                    <div class="dropdown-header">Otras opciones</div>
+                                                                    <button value='@term.Id' type="submit" name="view" class="dropdown-item">
+                                                                        Ver Detalles
+                                                                    </button>
+                                                                    <div class="form-group">
+                                                                        <button value='@term.Id' type="submit" name="password" class="dropdown-item">
+                                                                            Restablecer Contrase&ntilde;a
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="form-group">
+                                                                        <button value='@term.Id' type="submit" name="delete" class="dropdown-item">
+                                                                            Eliminar
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                </td>
+                                                </tr>
+                                            }
+                                        }
+                                        </tbody>
+                                        </table>
+                                    }
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

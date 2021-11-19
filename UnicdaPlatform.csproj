@@ -36,6 +36,8 @@
     <Compile Remove="Migrations\20210601002121_Fifth_Migration.Designer.cs" />
     <Compile Remove="Migrations\20210612223659_Second_Migration.cs" />
     <Compile Remove="Migrations\20210612223659_Second_Migration.Designer.cs" />
+    <Compile Remove="Migrations\20211110051903_First_Migration.cs" />
+    <Compile Remove="Migrations\20211110051903_First_Migration.Designer.cs" />
   </ItemGroup>
 
 
@@ -68,6 +70,7 @@
 
 
   <ItemGroup>
+    <Folder Include="Migrations\" />
     <Folder Include="wwwroot\Companies\" />
   </ItemGroup>
 

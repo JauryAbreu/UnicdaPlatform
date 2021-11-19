@@ -3,6 +3,7 @@ namespace UnicdaPlatform.Models.CarrierSubjects
 {
     public class CarrierUserPensum
     {
+        public int Id { get; set; }
         public string UserId { get; set; }
         public string CareerPensumId { get; set; }
         public string SessionCode { get; set; }

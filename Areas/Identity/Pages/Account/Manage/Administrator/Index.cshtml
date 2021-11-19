@@ -9,76 +9,7 @@
     <div class="cont-all">
         <!-- Page Heading -->
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="tit-general">Resumen General - Desde:  @Model.Input.DateFrom.ToString("dd-MM-yyyy") hasta @Model.Input.DateTo.ToString("dd-MM-yyyy")</h1>
-            <!-- <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-black shadow-sm"><i
-                            class="fas fa-download fa-sm text-white-50"></i> Generar reporte</a> -->
-            <!-- <a style="color: #fff;" href="#" class="d-none d-sm-inline-block btn btn-sm bg-blue-3 shadow-sm"> -->
-            <!-- Button trigger modal -->
-            <button style="color: #fff;" type="button" class="d-none d-sm-inline-block btn btn-sm bg-blue-3 shadow-sm" data-toggle="modal" data-target="#modalfecha">
-                <i class="fas fa-calendar-alt fa-sm text-white"></i> Filtro Fecha
-                @* </a>*@
-            </button>
-            <!-- Modal -->
-            <div class="modal fade" id="modalfecha" tabindex="-1" role="dialog" aria-labelledby="modalfechaLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content" style="width: 700px;">
-                        <div class="modal-header">
-                            <h6 class="modal-title" id="modalfechaLabel">Elegir rango de fecha</h6>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form method="post">
-                                <div class="row cont-filtros">
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                        <div class="form-group">
-                                            <label for="">Tipo de Busqueda</label>
-                                            <select class="form-select" aria-label="" asp-for="Input.Type">
-                                                <option value="0">1 Hora</option>
-                                                <option value="1">1 D&iacute;a</option>
-                                                <option value="2">15 D&iacute;as</option>
-                                                <option value="3">1 Mes</option>
-                                                <option value="4">3 Meses</option>
-                                                <option value="5">4 Meses</option>
-                                                <option value="6">6 Meses</option>
-                                                <option value="7">1 A&ntilde;o</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                        <label class="tit-label">Fecha Desde</label>
-                                        <div class="input-group mb-3">
-                                            <input type="date" class="form-control" aria-label=""  id="DateFrom"
-                                                   aria-describedby="" asp-for="Input.DateFrom">
-                                            <span class="input-group-text" id="">
-                                                <i class="far fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
-                                        <label class="tit-label">Fecha Hasta</label>
-                                        <div class="input-group mb-3">
-                                            <input type="date" class="form-control" aria-label=""  id="DateTo"
-                                                   aria-describedby="" asp-for="Input.DateTo">
-                                            <span class="input-group-text" id="">
-                                                <i class="far fa-calendar-alt"></i>
-                                            </span>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                                        <button class="btn btn-sm btn-success shadow-sm"
-                                                type="submit" style="font-size: 16px; ">
-                                            <i class="nav-link-icon fa fa-search"> </i> Buscar
-                                        </button>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <!--   <div class="modal-footer"><button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button><button type="button" class="btn btn-primary">Buscar</button></div> -->
-                    </div>
-                </div>
-            </div>
+            <h1 class="tit-general">Resumen General</h1>
         </div>
 
         <!-- Content Row -->
@@ -91,12 +22,12 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs text-white font-weight-bold  text-uppercase mb-1">
-                                    Ganancias
+                                    Materias en Curso
                                 </div>
-                                <div class="h5 text-gray-100">$ @Model.ProfitAmount.ToString("###,###,##0.00")</div>
+                                <div class="h5 text-gray-100"> @Model.ProfitAmount.ToString("###,###,##0")</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-hand-holding-usd fa-2x text-white"></i>
+                                <i class="fas fa-book fa-2x text-white"></i>
                             </div>
                             @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
                                 <a class="btn-ver" asp-area="Identity"
@@ -116,12 +47,12 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                    Ventas Totales
+                                   Materias Pendientes
                                 </div>
-                                <div class="h5 text-gray-100">$ @Model.TotalSales.ToString("###,###,##0.00")</div>
+                                <div class="h5 text-gray-100"> @Model.TotalSales.ToString("###,###,##0")</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-coins fa-2x text-white"></i>
+                                <i class="fas fa-user-graduate fa-2x text-white"></i>
                             </div>
                             @*<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
                                 <a class="btn-ver" asp-area="Identity"
@@ -141,11 +72,11 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Vehículos Disponibles</div>
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Total de Materias</div>
                                 <div class="h5 font-weight-bold text-gray-100">@Model.CarAvailable.ToString("###,###,##0")</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-car-side fa-2x text-white"></i>
+                                <i class="fas fa-graduation-cap fa-2x text-white"></i>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
                                 <a class="btn-ver" asp-area="Identity"
@@ -163,11 +94,11 @@
                     <div class="card-body">
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1"> Vehículos próximos a vencer </div>
-                                <div class="h5 font-weight-bold text-gray-100">@Model.CarExpiration.ToString("###,###,##0")</div>
+                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1"> Promedio Acumulado </div>
+                                <div class="h5 font-weight-bold text-gray-100">@Model.CarExpiration.ToString("##0.00")</div>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-exclamation-triangle fa-2x text-white"></i>
+                                <i class="fas fa-archive fa-2x text-white"></i>
                             </div>
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
                                 <a class="btn-ver" asp-area="Identity"
@@ -180,184 +111,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Content Row -->
-        <!-- Content Row -->
-        <!--<div class="row">-->
-            <!-- -->
-            <!-- Ganacias anual Card Example -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-red-car shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs text-white font-weight-bold  text-uppercase mb-1">
-                                    Ganancias
-                                </div>
-                                <div class="h5 text-gray-100">$ @Model.ProfitAmount.ToString("###,###,##0.00")</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-hand-holding-usd fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-eye"></i> Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- ventas del mes Card Example -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-grey-car shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
-                                    Ventas Totales
-                                </div>
-                                <div class="h5 text-gray-100">$ @Model.TotalSales.ToString("###,###,##0.00")</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-coins fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-eye"></i> Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- Vehiculos proximos  avencer Card Example -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-blue-3 shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Vehículos Disponibles</div>
-                                <div class="h5 font-weight-bold text-gray-100">@Model.CarAvailable</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-car-side fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-plus"></i> Agregar Vehículos
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- Vehiculos disponibles Card Example -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-blue-car shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Vehículos próximos a vencer</div>
-                                <div class="h5 font-weight-bold text-gray-100">@Model.CarExpiration</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-exclamation-triangle fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-eye"></i> Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- Ganancia bruta -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-blue-4 shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Ganancia Bruta</div>
-                                <div class="h5 font-weight-bold text-gray-100"></div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-chart-line fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-eye"></i> Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- Ganancia Neta -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-black shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Ganancia Neta</div>
-                                <div class="h5 font-weight-bold text-gray-100"></div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-donate fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-eye"></i> Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- Gastos Extra -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-blue-5 shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Gastos Extra</div>
-                                <div class="h5 font-weight-bold text-gray-100">@Model.ExpenseAmount.ToString("###,###,##0.00") </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-percentage fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-eye"></i> Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>-->
-            <!-- Ganancia bruta -->
-            <!--<div class="col-lg-3 col-md-6 col-sm-6 col-xs-12 col-xl-3 mb-4">
-                <div class="card bg-grey-2 shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Configuraciones </div>
-                                <div class="h5 font-weight-bold text-gray-100">@Model.DGIIAmount.ToString("###,###,##0.00")</div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-tools fa-2x text-white"></i>
-                            </div>
-                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                <a href="" class="btn-ver">
-                                    <i class="fas fa-eye"></i> Ver detalles
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
         <!-- Content Row -->
         <div class="row">
             <!-- Pie Chart -->
@@ -365,7 +118,7 @@
                 <div class="card shadow mb-4">
                     <!-- Card Header - Dropdown -->
                     <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-black"> Gastos Generales</h6>
+                        <h6 class="m-0 font-weight-bold text-black"> Creditos Cursados</h6>
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
@@ -375,273 +128,42 @@
                     </div>
                 </div>
             </div>
-            <!-- Area Chart -->
+
             <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-black">Detalles de Ganacias</h6>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-container" style="position: relative;">
-                            <canvas id="line-chart-canvas"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Content Row -->
-            <div class="">
-                <div class="row ">
-                    <!-- Content Column -->
-                    <div class="col-lg-6 mb-4">
-                        <!-- Project Card Example -->
-                        <div class="card shadow mb-4">
-                            <div class="card-header py-3">
-                                <h6 class="m-0 font-weight-bold text-info">Vehículos Próximos a Vencer</h6>
-                            </div>
-                            <div class="">
-                                <div class="card-body tabla-dash-2">
-                                    <div class="table-responsive tabla-top-2">
-                                        @using (Html.BeginForm())
-                                        {
-                                            <table class="table" id="dataTable" width="100%" cellspacing="0"
-                                                   data-order='[[ 3, "desc" ]]' data-page-length='5'>
-                                                <thead>
-                                                    <tr>
-                                                        <th>Marca</th>
-                                                        <th>Modelo</th>
-                                                        <th>Año</th>
-                                                        <th>Fecha Disponible</th>
-                                                        @*<th></th>*@
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
 
-
-                                                </tbody>
-                                            </table>
-                                        }
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 mb-4">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-4">
-                                <div class="card bg-red-car shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Ventas DGII Bruta</div>
-                                                <div class="h5 font-weight-bold text-gray-100">@Model.DGIITotalAmount.ToString("###,###,##0.00")</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-chart-line fa-2x text-white"></i>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                                <a class="btn-ver" asp-area="Identity"
-                                                   asp-page="/Account/Manage/Administrator/Reports/Report607Details">
-                                                <i class="fas fa-eye"></i> Ver detalles</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Ganancia Neta -->
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-4">
-                                <div class="card bg-grey-car shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Ventas DGII Neta</div>
-                                                <div class="h5 font-weight-bold text-gray-100">@Model.DGIINetAmount.ToString("###,###,##0.00")</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-donate fa-2x text-white"></i>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                                <a class="btn-ver" asp-area="Identity"
-                                                   asp-page="/Account/Manage/Administrator/Reports/Report607Details">
-                                                    <i class="fas fa-eye"></i> Ver detalles
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Gastos Extra -->
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-4">
-                                <div class="card bg-blue-car shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Gastos Extra</div>
-                                                <div class="h5 font-weight-bold text-gray-100">@Model.ExpenseAmount.ToString("###,###,##0.00") </div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-percentage fa-2x text-white"></i>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                                <a class="btn-ver" asp-area="Identity"
-                                                   asp-page="/Account/Manage/Administrator/Expenses/ExpenseListDetails">
-                                                    <i class="fas fa-eye"></i> Ver detalles</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Configuraciones -->
-                            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12 mb-4">
-                                <div class="card bg-black-2 shadow h-100 py-2">
-                                    <div class="card-body">
-                                        <div class="row no-gutters align-items-center">
-                                            <div class="col mr-2">
-                                                <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Impuestos DGII</div>
-                                                <div class="h5 font-weight-bold text-gray-100">@Model.DGIIAmount.ToString("###,###,##0.00")</div>
-                                            </div>
-                                            <div class="col-auto">
-                                                <i class="fas fa-tools fa-2x text-white"></i>
-                                            </div>
-                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 cont-boton-ver">
-                                                <a class="btn-ver" asp-area="Identity"
-                                                   asp-page="/Account/Manage/Administrator/Reports/Report607Details">
-                                                    <i class="fas fa-eye"></i> Ver detalles
-                                                </a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            @*<div class="col-lg-6 mb-4">
-            <div class="card bg-red-2 text-white shadow car-llamada">
-                <div class="card-body">
-                    Autorizacion Primera Placa
-
-                    <div class="small" style="margin-top: 8px;">
-                        <a class="text-white-40" href="">
-                            <i class="fas fa-download fa-sm text-white-40"></i> Generar Documento
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card bg-grey-2 text-white shadow car-llamada">
-                <div class="card-body">
-                    Solicitud de Endoso
-
-                    <div class="small" style="margin-top: 8px;">
-                        <a class="text-white-40" href="">
-                            <i class="fas fa-download fa-sm text-white-40"></i> Generar Documento
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card bg-blue-2 text-white shadow car-llamada">
-                <div class="card-body">
-                    Factura de Consumidor Final
-
-                    <div class="small" style="margin-top: 8px;">
-                        <a class="text-white-40" href="">
-                            <i class="fas fa-download fa-sm text-white-40"></i> Generar Documento
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card bg-black-2 text-white shadow car-llamada">
-                <div class="card-body">
-                    Factura a DGII
-
-                    <div class="small" style="margin-top: 8px;">
-                        <a class="text-white-40" href="">
-                            <i class="fas fa-download fa-sm text-white-40"></i> Generar Documento
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card bg-blue-4 text-white shadow car-llamada">
-                <div class="card-body">
-                    Cotización
-
-                    <div class="small" style="margin-top: 8px;">
-                        <a class="text-white-40" href="">
-                            <i class="fas fa-download fa-sm text-white-40"></i> Generar Documento
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-6 mb-4">
-            <div class="card bg-blue-3 text-white shadow car-llamada">
-                <div class="card-body">
-                    Reporte IR2
-
-                    <div class="small" style="margin-top: 8px;">
-                        <a class="text-white-40" href="">
-                            <i class="fas fa-download fa-sm text-white-40"></i> Generar Documento
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>*@
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <!-- Project Card Example -->
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <div class="d-sm-flex align-items-center justify-content-between">
-                            <h6 class="m-0 font-weight-bold text-black">Total de Vehículos Vendidos</h6>
-                            <a asp-area="Identity" asp-page="/Account/Manage/Administrator/Items/ItemInformation"
-                               class="d-none d-sm-inline-block btn btn-sm btn-blue shadow-sm">
-                                <i class="fas fa-plus fa-sm text-white"></i> Ingresar Vehículos
-                            </a>
-                        </div>
+                        <h6 class="m-0 font-weight-bold text-info">Materias en Curso</h6>
                     </div>
-                    <div class="card-body tabla-dash">
-                        <div class="table-responsive tabla-top-2">
-                            @using (Html.BeginForm())
-                            {
-                                <table class="table table-bordered" id="dataTable1" width="100%" cellspacing="0"
-                                       data-order='[[ 9, "desc" ]]' data-page-length='3'>
-                                    <thead>
-                                        <tr>
-                                            <th>Cliente</th>
-                                            <th>Marca</th>
-                                            <th>Modelo</th>
-                                            <th>Serie</th>
-                                            <th>Precio Compra</th>
-                                            <th>Precio CIF</th>
-                                            <th>Precio Venta</th>
-                                            <th>Precio Vendido</th>
-                                            <th>Fecha Ingreso</th>
-                                            <th>Fecha Compra</th>
-                                            <th>Ganancias</th>
-                                        </tr>
-                                    </thead>
-                                    <!--
-                                <tfoot><tr><th>Name</th><th>Position</th><th>Office</th><th>Age</th><th>Start date</th><th>Salary</th></tr></tfoot> -->
-                                    <tbody>
-                                    </tbody>
-                                </table>
-                            }
+                    <div class="">
+                        <div class="card-body tabla-dash-2">
+                            <div class="table-responsive tabla-top-2">
+                                @using (Html.BeginForm())
+                                {
+                                    <table class="table" id="dataTable" width="100%" cellspacing="0"
+                                            data-order='[[ 3, "desc" ]]' data-page-length='5'>
+                                        <thead>
+                                            <tr>
+                                                <th>Codigo</th>
+                                                <th>Materia</th>
+                                                <th>Creditos</th>
+                                                <th>Profesor</th>
+                                                @*<th></th>*@
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                        </tbody>
+                                    </table>
+                                }
+                            </div>
                         </div>
                     </div>
                 </div>
+
+
             </div>
+
         </div>
     </div>
     <!-- /.container-fluid -->

@@ -1,0 +1,115 @@
+﻿@page
+@model UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Request.RemoveMatterModel
+@{
+    ViewBag.Title = "Retiro de Materia";
+    Layout = "~/Areas/Identity/Pages/Account/Manage/Administrator/_AdmLayout.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="cont-all">
+        <!-- Page Heading -->
+        <div class="d-sm-flex align-items-center justify-content-between mb-4">
+            <h1 class="tit-general">RETIRO DE MATERIA</h1>
+        </div>
+
+        <!-- Content Row -->
+        <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                <div class="card shadow mb-4">
+
+                    <div class="card-header py-3">
+                        <div class="d-sm-flex align-items-center justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-black">Informacion de Retiro</h6>
+                        </div>
+                    </div>
+                    <form method="post">
+                        <div class="card-body form-vehiculo">
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+
+                                        <input asp-for="Input.Id" type="text" autocomplete="off" hidden>
+                                        <input asp-for="Input.Deleted" type="text" autocomplete="off" hidden>
+                                        <label for="">Matricula</label>
+                                        <input asp-for="Input.UserId" type="text" placeholder="2015-30-3-0036"
+                                               class="form-control" id="" autocomplete="off" required readonly>
+                                        <span asp-validation-for="Input.UserId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Codigo Sesion</label>
+                                        <select class="form-select" asp-for="Input.SessionCode" aria-label="">
+                                            <option value="2">INC-500 Proyecto Integrador II</option>
+                                            <option value="0">MAT-132 Algebra Lineal</option>
+                                            <option value="1">IDS-301 Modelos Evolutivos</option>
+                                            <option value="3">IDS-322 Desarrollo Web I</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Periodo</label>
+                                        <input asp-for="Input.PeriodYear" type="text" placeholder="2021"
+                                               class="form-control" id="" autocomplete="off" required readonly>
+                                        <span asp-validation-for="Input.PeriodYear" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Ciclo</label>
+                                        <input asp-for="Input.PeriodCycle" type="text" placeholder="Cuatrimetre 3"
+                                               class="form-control" id="" autocomplete="off" required readonly>
+                                        <span asp-validation-for="Input.PeriodCycle" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Codigo Materia</label>
+                                        <input asp-for="Input.SessionCode" type="text" placeholder="INC-500"
+                                               class="form-control" id="" autocomplete="off" required readonly>
+                                        <span asp-validation-for="Input.SessionCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Materia</label>
+                                        <input asp-for="Input.Description" type="text" placeholder="Proyecto Integrador II"
+                                               class="form-control" id="" autocomplete="off" required readonly>
+                                        <span asp-validation-for="Input.Description" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Comentario</label>
+                                        <textarea asp-for="Input.Comment" type="text" placeholder=""
+                                                  class="form-control" id="" autocomplete="off"
+                                                  rows="5" cols="50" required></textarea>
+                                        <!--<input asp-for="Input.Comment" type="text" placeholder=""
+            class="form-control" id="" autocomplete="off" required>-->
+                                        <span asp-validation-for="Input.Comment" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                                <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="margin-bottom: 20px;">
+
+                                    <span asp-validation-for="ErrorMessage" class="text-danger"></span>
+                                    <button class="btn btn-sm btn-success shadow-sm"
+                                            type="submit" onclick="return confirm('Seguro que desea Guardar la solicitud de Retirar Materia?')"
+                                            style="font-size: 16px; ">
+                                        <i class="nav-link-icon fa fa-save"> </i> GUARDAR
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+   
+
+    </div>
+</div>

@@ -67,51 +67,59 @@
             <hr class="sidebar-divider">
             <li class="nav-item">
                 <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Items/Details"
-                   data-toggle="collapse" data-target="#collapseTwo"
-                   aria-expanded="true" aria-controls="collapseTwo">
+                   data-toggle="collapse" data-target="#collapseOne"
+                   aria-expanded="true" aria-controls="collapseOne">
                     <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Vehículos</span>
+                    <span>Matriculacion</span>
                 </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                <div id="collapseOne" class="collapse" aria-labelledby="headingOne" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/ItemInformation">Ingresar Nuevo</a>
+                           asp-page="/Account/Manage/Administrator/Items/ItemInformation">Inscripcion</a>
                         <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/ItemDetails">Propietarios Disponibles.</a>
+                           asp-page="/Account/Manage/Administrator/Items/ItemDetails">Pre-Seleccion.</a>
                         <div class="dropdown-divider"></div>
                         <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/ItemAffiliateInformation">Ingresar Soc. Nuevo</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/ItemAffiliateDetails">Socios Disponibles</a>
+                           asp-page="/Account/Manage/Administrator/Items/ItemDetails">Historico</a>
                         <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/ItemToBeatDetails">Proximos a Vencer</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/CompletedDetails">Vendidos</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/CompletedAffiliateDetails">Vendidos Socios</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Items/DepartmentDetails">Marca y Modelo</a>
                     </div>
                 </div>
             </li>
             <li class="nav-item">
-                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Invoice"
-                   data-toggle="collapse" data-target="#collapsefacturacion"
-                   aria-expanded="true" aria-controls="collapsefacturacion">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Items/Details"
+                   data-toggle="collapse" data-target="#collapseTwo"
+                   aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-clipboard-list"></i>
-                    <span>Facturación</span>
+                    <span>Pagos</span>
                 </a>
-                <div id="collapsefacturacion" class="collapse" aria-labelledby="headingfacturacion" data-parent="#accordionSidebar">
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/TransactionInformation">Ventas</a>
-                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/CreditMemoInformation">Devolucion</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemInformation">Inscripcion</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemDetails">Cuotas Pendientes</a>
                         <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/QuoteInformation">Cotizacion</a>
+                        <a class="collapse-item" asp-area="Identity"
+                           asp-page="/Account/Manage/Administrator/Items/ItemDetails">Historico</a>
                         <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/TransactionDetails">Realizadas</a>
+                    </div>
+                </div>
+            </li>
+
+            <hr class="sidebar-divider">
+            <li class="nav-item">
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Invoice"
+                   data-toggle="collapse" data-target="#collapse3"
+                   aria-expanded="true" aria-controls="collapse3">
+                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <span>Materias</span>
+                </a>
+                <div id="collapse3" class="collapse" aria-labelledby="heading3" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/TransactionInformation">En curso</a>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/CreditMemoInformation">Cursadas</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/TransactionDetails">Pensum</a>
 
                         @*<a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Expensive">Otros gastos</a>
                     <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Details">Historial</a>*@
@@ -119,118 +127,28 @@
                 </div>
             </li>
 
+
             <li class="nav-item">
-                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Administrator/Customers/CustomerDetails">
-                    <i class="fas fa-fw fa-briefcase"></i>
-                    <span>Clientes</span>
+                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Invoice"
+                   data-toggle="collapse" data-target="#collapse4"
+                   aria-expanded="true" aria-controls="collapse4">
+                    <i class="fas fa-fw fa-clipboard-list"></i>
+                    <span>Solicitud</span>
                 </a>
+                <div id="collapse4" class="collapse" aria-labelledby="heading4" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Request/RemoveMatter">Retirar Materia</a>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Request/ChangeCarrier">Cambio de Carrera</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Request/Complaints">Quejas</a>
+
+                        @*<a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Expensive">Otros gastos</a>
+                    <a class="collapse-item" asp-area="Identity" asp-page="/Account/Manage/Administrator/Transactions/Details">Historial</a>*@
+                    </div>
+                </div>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Administrator/Affiliates/AffiliateDetails">
-                    <i class="fas fa-fw fa-user"></i>
-                    <span>Socios</span>
-                </a>
-            </li>
+
             <hr class="sidebar-divider">
-            <div class="sidebar-heading">
-                Finanzas
-            </div>
-            <li class="nav-item">
-                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Accounts/AccountDetails"
-                   data-toggle="collapse" data-target="#collapseAccount"
-                   aria-expanded="true" aria-controls="collapseAccount">
-                    <i class="fas fa-fw fa-user-alt"></i>
-                    <span>Cuenta Contable</span>
-                </a>
-                <div id="collapseAccount" class="collapse" aria-labelledby="headingAccount" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Accounts/AccountInformation">Ingresar Cuenta</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Accounts/AccountDetails">Disponible</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Accounts/AccountTransactionDetails">Diario General</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Accounts/AccountCapitalInformation">Deposito de Capital</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Accounts/AccountTransferInformation">Transferencias Internas</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Accounts/AccountCxCInformation">Cuentas por Cobrar</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Accounts/AccountCxPInformation">Cuentas por Pagar</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Reports/Report607Details"
-                   data-toggle="collapse" data-target="#collapseReport"
-                   aria-expanded="true" aria-controls="collapseReport">
-                    <i class="fas fa-fw fa-chart-area"></i>
-                    <span>Reportes</span>
-                </a>
-                <div id="collapseReport" class="collapse" aria-labelledby="headingReporte" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Reports/Report606Details">606</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Reports/Report607Details">607</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Reports/ReportIR2Details">IR2</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Reports/ReportProfit">Beneficio</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Reports/ReportProfitDetails">Beneficio Detallado</a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Expenses/ExpenseListInformation"
-                   data-toggle="collapse" data-target="#collapseExpense"
-                   aria-expanded="true" aria-controls="collapseExpense">
-                    <i class="fas fa-fw fa-user-alt"></i>
-                    <span>Gastos</span>
-                </a>
-                <div id="collapseExpense" class="collapse" aria-labelledby="headingExpense" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseListInformation">Ingresar</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseListDetails">Administrativos</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseItemListDetails">Vehiculos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Expenses/ExpenseDetails">Tipos</a>
-                    </div>
-                </div>
-            </li>
-
-            <li class="nav-item">
-                <a class="nav-link collapsed" asp-area="Identity" asp-page="/Account/Manage/Administrator/Incomes/IncomeListInformation"
-                   data-toggle="collapse" data-target="#collapseIncome"
-                   aria-expanded="true" aria-controls="collapseIncome">
-                    <i class="fas fa-fw fa-user-alt"></i>
-                    <span>Ingresos</span>
-                </a>
-                <div id="collapseIncome" class="collapse" aria-labelledby="headingIncome" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Incomes/IncomeListInformation">Ingresar</a>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Incomes/IncomeListDetails">Administrativos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="collapse-item" asp-area="Identity"
-                           asp-page="/Account/Manage/Administrator/Incomes/IncomeDetails">Tipos</a>
-                    </div>
-                </div>
-            </li>
-
-
-
             <li class="nav-item">
                 <a class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Administrator/Fiscals/FiscalDetails">
                     <i class="fas fa-fw fa-balance-scale"></i>

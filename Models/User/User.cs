@@ -21,7 +21,9 @@
         [System.ComponentModel.DataAnnotations.MaxLength(300)]
         public string Address { get; set; }
         public int Gender { get; set; }
-        public int CareerId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(36)]
+        public string CareerId { get; set; }
         public string VatNumber { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.MaxLength(100)]

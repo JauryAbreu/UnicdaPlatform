@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnicdaPlatform.Data;
-using UnicdaPlatform.Models.CarrierSubjects;
+using UnicdaPlatform.Models.CareerSubjects;
 
-namespace UnicdaPlatform.Controllers.CarrierSubject
+namespace UnicdaPlatform.Controllers.CareerSubject
 {
-    public class CarrierUserTeacherPensumController
+    public class CareerUserTeacherPensumController
     {
         public bool Exist(ApplicationDbContext context, int Id)
         {
             try
             {
-                return context.CarrierUserTeacherPensum.Any(a => a.Id == Id);
+                return context.CareerUserTeacherPensum.Any(a => a.Id == Id);
             }
             catch (Exception ex)
             {
@@ -25,22 +25,22 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
         {
             try
             {
-                var trans = context.CarrierUserTeacherPensum.Where(a => a.Id == Id).First();
+                var trans = context.CareerUserTeacherPensum.Where(a => a.Id == Id).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new CarrierUserTeacherPensum();
+                return new CareerUserTeacherPensum();
             }
         }
 
-        public object Get(ApplicationDbContext context, string CareerId, string CareerPensumId, string SessionCode, int PeriodCycle, int PeriodYear)
+        public object Get(ApplicationDbContext context, string CareerId, int CareerPensumId, string SessionCode, int PeriodCycle, int PeriodYear)
         {
             try
             {
-                var trans = context.CarrierUserTeacherPensum.Where(a => a.UserId == CareerId && a.CareerPensumId == CareerPensumId &&
+                var trans = context.CareerUserTeacherPensum.Where(a => a.UserId == CareerId && a.CareerPensumId == CareerPensumId &&
                                                                         a.SessionCode == SessionCode && a.PeriodCycle == PeriodCycle &&
                                                                         a.PeriodYear == PeriodYear).First();
 
@@ -49,20 +49,20 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new CarrierUserTeacherPensum();
+                return new CareerUserTeacherPensum();
             }
         }
 
-        public List<CarrierUserTeacherPensum> GetList(ApplicationDbContext context)
+        public List<CareerUserTeacherPensum> GetList(ApplicationDbContext context)
         {
             try
             {
-                return context.CarrierUserTeacherPensum.ToList();
+                return context.CareerUserTeacherPensum.ToList();
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new List<CarrierUserTeacherPensum>();
+                return new List<CareerUserTeacherPensum>();
             }
         }
 
@@ -70,11 +70,11 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
         {
             try
             {
-                var dataSave = (CarrierUserTeacherPensum)data;
+                var dataSave = (CareerUserTeacherPensum)data;
                 if (dataSave.Id == 0)
-                    context.CarrierUserTeacherPensum.Add(dataSave);
+                    context.CareerUserTeacherPensum.Add(dataSave);
                 else
-                    context.CarrierUserTeacherPensum.Update(dataSave);
+                    context.CareerUserTeacherPensum.Update(dataSave);
 
                 return context.SaveChanges();
             }

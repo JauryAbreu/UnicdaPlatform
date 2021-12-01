@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnicdaPlatform.Data;
-using UnicdaPlatform.Models.CarrierSubjects;
+using UnicdaPlatform.Models.CareerSubjects;
 
-namespace UnicdaPlatform.Controllers.CarrierSubject
+namespace UnicdaPlatform.Controllers.CareerSubject
 {
-    public class CarrierUserPensumDetailsController
+    public class CareerUserPensumDetailsController
     {
         public bool Exist(ApplicationDbContext context, int Id)
         {
             try
             {
-                return context.CarrierUserPensumDetails.Any(a => a.Id == Id);
+                return context.CareerUserPensumDetails.Any(a => a.Id == Id);
             }
             catch (Exception ex)
             {
@@ -21,48 +21,31 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
             }
         }
 
-        public object Get(ApplicationDbContext context, int Id)
+        public object Get(ApplicationDbContext context, int CareerUserPensumId)
         {
             try
             {
-                var trans = context.CarrierUserPensumDetails.Where(a => a.Id == Id).First();
+                var trans = context.CareerUserPensumDetails.Where(a => a.CareerUserPensumId == CareerUserPensumId).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new CarrierUserPensumDetails();
+                return new CareerUserPensumDetails();
             }
         }
 
-        public object Get(ApplicationDbContext context, string CareerId, string CareerPensumId, string SessionCode, int PeriodCycle, int PeriodYear)
+        public List<CareerUserPensumDetails> GetList(ApplicationDbContext context)
         {
             try
             {
-                var trans = context.CarrierUserPensumDetails.Where(a => a.UserId == CareerId && a.CareerPensumId == CareerPensumId &&
-                                                                        a.SessionCode == SessionCode && a.PeriodCycle == PeriodCycle &&
-                                                                        a.PeriodYear == PeriodYear).First();
-
-                return trans;
+                return context.CareerUserPensumDetails.ToList();
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new CarrierUserPensumDetails();
-            }
-        }
-
-        public List<CarrierUserPensumDetails> GetList(ApplicationDbContext context)
-        {
-            try
-            {
-                return context.CarrierUserPensumDetails.ToList();
-            }
-            catch (Exception ex)
-            {
-                TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new List<CarrierUserPensumDetails>();
+                return new List<CareerUserPensumDetails>();
             }
         }
 
@@ -70,11 +53,11 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
         {
             try
             {
-                var dataSave = (CarrierUserPensumDetails)data;
+                var dataSave = (CareerUserPensumDetails)data;
                 if (dataSave.Id == 0)
-                    context.CarrierUserPensumDetails.Add(dataSave);
+                    context.CareerUserPensumDetails.Add(dataSave);
                 else
-                    context.CarrierUserPensumDetails.Update(dataSave);
+                    context.CareerUserPensumDetails.Update(dataSave);
 
                 return context.SaveChanges();
             }

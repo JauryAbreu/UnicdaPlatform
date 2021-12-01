@@ -1,20 +1,15 @@
 ﻿
-namespace UnicdaPlatform.Models.CarrierSubjects
+namespace UnicdaPlatform.Models.CareerSubjects
 {
-    public class CarrierUserPensumDetails
+    public class CareerUserPensumDetails
     {
         public int Id { get; set; }
-        public string UserId { get; set; }
-        public string CareerPensumId { get; set; }
-        public string SessionCode { get; set; }
-        public int PeriodCycle { get; set; }
-        public int PeriodYear { get; set; }
+        public int CareerUserPensumId { get; set; }
         public decimal FirstTest { get; set; }
         public decimal SecondTest { get; set; }
         public decimal Practice { get; set; }
         public decimal FinalTest { get; set; }
-        public string UserIdTeacher { get; set; }
-        public int Credit { get; set; }
+        public decimal Total { get; set; }
         public int Status { get; set; }
         public bool Deleted { get; set; }
     }

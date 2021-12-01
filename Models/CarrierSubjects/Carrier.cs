@@ -1,6 +1,6 @@
-﻿namespace UnicdaPlatform.Models.CarrierSubjects
+﻿namespace UnicdaPlatform.Models.CareerSubjects
 {
-    public class Carrier
+    public class Career
     {
         public int Id { get; set; }
         public string CompanyId { get; set; }

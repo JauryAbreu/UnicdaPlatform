@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnicdaPlatform.Data;
-using UnicdaPlatform.Models.CarrierSubjects;
+using UnicdaPlatform.Models.CareerSubjects;
 
-namespace UnicdaPlatform.Controllers.CarrierSubjects
+namespace UnicdaPlatform.Controllers.CareerSubjects
 {
-    public class CarrierPensumController
+    public class CareerPensumController
     {
         public bool Exist(ApplicationDbContext context, int Id)
         {
             try
             {
-                return context.CarrierPensum.Any(a => a.Id == Id);
+                return context.CareerPensum.Any(a => a.Id == Id);
             }
             catch (Exception ex)
             {
@@ -25,42 +25,42 @@ namespace UnicdaPlatform.Controllers.CarrierSubjects
         {
             try
             {
-                var trans = context.CarrierPensum.Where(a => a.Id == Id).First();
+                var trans = context.CareerPensum.Where(a => a.Id == Id).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new CarrierPensum();
+                return new CareerPensum();
             }
         }
 
-        public object Get(ApplicationDbContext context, string CareerId, string CareerPensumId)
+        public object Get(ApplicationDbContext context, string CareerId, string MatterId)
         {
             try
             {
-                var trans = context.CarrierPensum.Where(a => a.CareerId == CareerId && a.CareerPensumId == CareerPensumId).First();
+                var trans = context.CareerPensum.Where(a => a.CareerId == CareerId && a.MatterId == MatterId).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new CarrierPensum();
+                return new CareerPensum();
             }
         }
 
-        public List<CarrierPensum> GetList(ApplicationDbContext context)
+        public List<CareerPensum> GetList(ApplicationDbContext context)
         {
             try
             {
-                return context.CarrierPensum.ToList();
+                return context.CareerPensum.ToList();
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new List<CarrierPensum>();
+                return new List<CareerPensum>();
             }
         }
 
@@ -68,11 +68,11 @@ namespace UnicdaPlatform.Controllers.CarrierSubjects
         {
             try
             {
-                var dataSave = (CarrierPensum)data;
+                var dataSave = (CareerPensum)data;
                 if (dataSave.Id == 0)
-                    context.CarrierPensum.Add(dataSave);
+                    context.CareerPensum.Add(dataSave);
                 else
-                    context.CarrierPensum.Update(dataSave);
+                    context.CareerPensum.Update(dataSave);
 
                 return context.SaveChanges();
             }

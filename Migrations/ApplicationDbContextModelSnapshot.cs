@@ -219,7 +219,7 @@ namespace UnicdaPlatform.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("UnicdaPlatform.Models.CarrierSubjects.Carrier", b =>
+            modelBuilder.Entity("UnicdaPlatform.Models.CareerSubjects.Career", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -242,10 +242,10 @@ namespace UnicdaPlatform.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("Carrier");
+                    b.ToTable("Career");
                 });
 
-            modelBuilder.Entity("UnicdaPlatform.Models.CarrierSubjects.CarrierPensum", b =>
+            modelBuilder.Entity("UnicdaPlatform.Models.CareerSubjects.CareerPensum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -255,40 +255,35 @@ namespace UnicdaPlatform.Migrations
                     b.Property<string>("CareerId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("CareerPensumId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("CompanyId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Credit")
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("MatterId")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Period")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PreCareerPensumId")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
 
-                    b.ToTable("CarrierPensum");
+                    b.ToTable("CareerPensum");
                 });
 
-            modelBuilder.Entity("UnicdaPlatform.Models.CarrierSubjects.CarrierUserPensum", b =>
+            modelBuilder.Entity("UnicdaPlatform.Models.CareerSubjects.CareerUserPensum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CareerPensumId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CareerPensumId")
+                        .HasColumnType("int")
+                        .HasMaxLength(50);
 
                     b.Property<int>("Credit")
                         .HasColumnType("int");
@@ -306,35 +301,35 @@ namespace UnicdaPlatform.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SessionCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<string>("UserIdTeacher")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
 
-                    b.ToTable("CarrierUserPensum");
+                    b.ToTable("CareerUserPensum");
                 });
 
-            modelBuilder.Entity("UnicdaPlatform.Models.CarrierSubjects.CarrierUserPensumDetails", b =>
+            modelBuilder.Entity("UnicdaPlatform.Models.CareerSubjects.CareerUserPensumDetails", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CareerPensumId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Credit")
+                    b.Property<int>("CareerUserPensumId")
                         .HasColumnType("int");
 
                     b.Property<bool>("Deleted")
@@ -346,49 +341,38 @@ namespace UnicdaPlatform.Migrations
                     b.Property<decimal>("FirstTest")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("PeriodCycle")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PeriodYear")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("Practice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<decimal>("SecondTest")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<string>("SessionCode")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<int>("Status")
                         .HasColumnType("int");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserIdTeacher")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<decimal>("Total")
+                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
 
-                    b.ToTable("CarrierUserPensumDetails");
+                    b.ToTable("CareerUserPensumDetails");
                 });
 
-            modelBuilder.Entity("UnicdaPlatform.Models.CarrierSubjects.CarrierUserTeacherPensum", b =>
+            modelBuilder.Entity("UnicdaPlatform.Models.CareerSubjects.CareerUserTeacherPensum", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CareerPensumId")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("CareerPensumId")
+                        .HasColumnType("int");
 
                     b.Property<string>("ClassRoom")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
 
                     b.Property<int>("Day")
                         .HasColumnType("int");
@@ -403,7 +387,8 @@ namespace UnicdaPlatform.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SessionCode")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -415,33 +400,71 @@ namespace UnicdaPlatform.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
                     b.HasIndex("Id");
 
-                    b.ToTable("CarrierUserTeacherPensum");
+                    b.ToTable("CareerUserTeacherPensum");
                 });
 
-            modelBuilder.Entity("UnicdaPlatform.Models.CarrierSubjects.UserMatter", b =>
+            modelBuilder.Entity("UnicdaPlatform.Models.CareerSubjects.Matter", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("CareerPensumId")
+                    b.Property<string>("CompanyId")
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
+
+                    b.Property<int>("Credit")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("Deleted")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("MatterId")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("PreMatterId")
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Id");
+
+                    b.ToTable("Matter");
+                });
+
+            modelBuilder.Entity("UnicdaPlatform.Models.CareerSubjects.UserMatter", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CareerPensumId")
+                        .HasColumnType("int");
+
                     b.Property<string>("CompanyId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
                     b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.HasKey("Id");
 
@@ -711,7 +734,7 @@ namespace UnicdaPlatform.Migrations
                     b.ToTable("Complaints");
                 });
 
-            modelBuilder.Entity("UnicdaPlatform.Models.Request.RequestUserChangeCarrier", b =>
+            modelBuilder.Entity("UnicdaPlatform.Models.Request.RequestUserChangeCareer", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -740,7 +763,7 @@ namespace UnicdaPlatform.Migrations
 
                     b.HasIndex("Id");
 
-                    b.ToTable("RequestUserChangeCarrier");
+                    b.ToTable("RequestUserChangeCareer");
                 });
 
             modelBuilder.Entity("UnicdaPlatform.Models.Request.RequestUserMatter", b =>
@@ -993,8 +1016,9 @@ namespace UnicdaPlatform.Migrations
                     b.Property<decimal>("Average")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<int>("CareerId")
-                        .HasColumnType("int");
+                    b.Property<string>("CareerId")
+                        .HasColumnType("nvarchar(36)")
+                        .HasMaxLength(36);
 
                     b.Property<string>("CompanyId")
                         .HasColumnType("nvarchar(36)")

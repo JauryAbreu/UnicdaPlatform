@@ -11,13 +11,13 @@ using UnicdaPlatform.Models.User;
 
 namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Request
 {
-    public class ChangeCarrierModel : BasePage
+    public class ChangeCareerModel : BasePage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public ChangeCarrierModel(
+        public ChangeCareerModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ApplicationDbContext context)
@@ -28,17 +28,17 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
         }
         public string Username { get; set; } public string Picture { get; set; } public string CompanyName { get; set; }
         private UserMainController _user = new UserMainController();
-        private RequestUserChangeCarrierController _request = new RequestUserChangeCarrierController();
-        public List<RequestUserChangeCarrier> requestList = new List<RequestUserChangeCarrier>();
-        public RequestUserChangeCarrier request { get; set; }
+        private RequestUserChangeCareerController _request = new RequestUserChangeCareerController();
+        public List<RequestUserChangeCareer> requestList = new List<RequestUserChangeCareer>();
+        public RequestUserChangeCareer request { get; set; }
 
         [BindProperty]
         public InputModel Input { get; set; }
-        public class InputModel : RequestUserChangeCarrier { };
+        public class InputModel : RequestUserChangeCareer { };
         public string Header = "Cambio de Carrera";
         private async Task LoadAsync(int id, string userId)
         {
-            request = (id > 0) ?(RequestUserChangeCarrier)_request.Get(_context, id) : new RequestUserChangeCarrier();
+            request = (id > 0) ?(RequestUserChangeCareer)_request.Get(_context, id) : new RequestUserChangeCareer();
 
             if (!string.IsNullOrEmpty(userId))
                 requestList = _request.GetList(_context, userId);
@@ -108,7 +108,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                         return Page();
                     }
 
-                    var data = new RequestUserChangeCarrier();
+                    var data = new RequestUserChangeCareer();
 
                     data.Id = Input.Id;
                     data.UserId = Input.UserId;

@@ -1,6 +1,6 @@
 ﻿namespace UnicdaPlatform.Models.Request
 {
-    public class RequestUserChangeCarrier
+    public class RequestUserChangeCareer
     {
         public int Id { get; set; }
         public string UserId { get; set; }

@@ -6,13 +6,13 @@ using UnicdaPlatform.Models.Request;
 
 namespace UnicdaPlatform.Controllers.Request
 {
-    public class RequestUserChangeCarrierController
+    public class RequestUserChangeCareerController
     {
         public bool Exist(ApplicationDbContext context, int Id)
         {
             try
             {
-                return context.RequestUserChangeCarrier.Any(a => a.Id == Id);
+                return context.RequestUserChangeCareer.Any(a => a.Id == Id);
             }
             catch (Exception ex)
             {
@@ -25,14 +25,14 @@ namespace UnicdaPlatform.Controllers.Request
         {
             try
             {
-                var trans = context.RequestUserChangeCarrier.Where(a => a.Id == Id).First();
+                var trans = context.RequestUserChangeCareer.Where(a => a.Id == Id).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new RequestUserChangeCarrier();
+                return new RequestUserChangeCareer();
             }
         }
 
@@ -40,40 +40,40 @@ namespace UnicdaPlatform.Controllers.Request
         {
             try
             {
-                var trans = context.RequestUserChangeCarrier.Where(a => a.UserId == UserId).First();
+                var trans = context.RequestUserChangeCareer.Where(a => a.UserId == UserId).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new RequestUserChangeCarrier();
+                return new RequestUserChangeCareer();
             }
         }
 
-        public List<RequestUserChangeCarrier> GetList(ApplicationDbContext context)
+        public List<RequestUserChangeCareer> GetList(ApplicationDbContext context)
         {
             try
             {
-                return context.RequestUserChangeCarrier.ToList();
+                return context.RequestUserChangeCareer.ToList();
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new List<RequestUserChangeCarrier>();
+                return new List<RequestUserChangeCareer>();
             }
         }
 
-        public List<RequestUserChangeCarrier> GetList(ApplicationDbContext context, string UserId)
+        public List<RequestUserChangeCareer> GetList(ApplicationDbContext context, string UserId)
         {
             try
             {
-                return context.RequestUserChangeCarrier.Where(a => a.UserId == UserId).ToList();
+                return context.RequestUserChangeCareer.Where(a => a.UserId == UserId).ToList();
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new List<RequestUserChangeCarrier>();
+                return new List<RequestUserChangeCareer>();
             }
         }
 
@@ -81,11 +81,11 @@ namespace UnicdaPlatform.Controllers.Request
         {
             try
             {
-                var dataSave = (RequestUserChangeCarrier)data;
+                var dataSave = (RequestUserChangeCareer)data;
                 if (dataSave.Id == 0)
-                    context.RequestUserChangeCarrier.Add(dataSave);
+                    context.RequestUserChangeCareer.Add(dataSave);
                 else
-                    context.RequestUserChangeCarrier.Update(dataSave);
+                    context.RequestUserChangeCareer.Update(dataSave);
 
                 return context.SaveChanges();
             }

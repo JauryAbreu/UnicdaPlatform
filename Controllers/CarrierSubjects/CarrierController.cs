@@ -2,17 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnicdaPlatform.Data;
-using UnicdaPlatform.Models.CarrierSubjects;
+using UnicdaPlatform.Models.CareerSubjects;
 
-namespace UnicdaPlatform.Controllers.CarrierSubject
+namespace UnicdaPlatform.Controllers.CareerSubject
 {
-    public class CarrierController
+    public class CareerController
     {
         public bool Exist(ApplicationDbContext context, int Id)
         {
             try
             {
-                return context.Carrier.Any(a => a.Id == Id);
+                return context.Career.Any(a => a.Id == Id);
             }
             catch (Exception ex)
             {
@@ -25,14 +25,14 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
         {
             try
             {
-                var trans = context.Carrier.Where(a => a.Id == Id).First();
+                var trans = context.Career.Where(a => a.Id == Id).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new Carrier();
+                return new Career();
             }
         }
 
@@ -40,27 +40,27 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
         {
             try
             {
-                var trans = context.Carrier.Where(a => a.CareerId == CareerId).First();
+                var trans = context.Career.Where(a => a.CareerId == CareerId).First();
 
                 return trans;
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new Carrier();
+                return new Career();
             }
         }
 
-        public List<Carrier> GetList(ApplicationDbContext context)
+        public List<Career> GetList(ApplicationDbContext context)
         {
             try
             {
-                return context.Carrier.ToList();
+                return context.Career.ToList();
             }
             catch (Exception ex)
             {
                 TXTSaveLog.WriteToTxtFile(ex.Message);
-                return new List<Carrier>();
+                return new List<Career>();
             }
         }
 
@@ -68,11 +68,11 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
         {
             try
             {
-                var dataSave = (Carrier)data;
+                var dataSave = (Career)data;
                 if (dataSave.Id == 0)
-                    context.Carrier.Add(dataSave);
+                    context.Career.Add(dataSave);
                 else
-                    context.Carrier.Update(dataSave);
+                    context.Career.Update(dataSave);
 
                 return context.SaveChanges();
             }

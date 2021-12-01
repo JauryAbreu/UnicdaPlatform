@@ -68,6 +68,104 @@ namespace UnicdaPlatform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Career",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<string>(nullable: true),
+                    CareerId = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Career", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CareerPensum",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<string>(nullable: true),
+                    CareerId = table.Column<string>(nullable: true),
+                    MatterId = table.Column<string>(nullable: true),
+                    Period = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CareerPensum", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CareerUserPensum",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(maxLength: 50, nullable: true),
+                    CareerPensumId = table.Column<int>(maxLength: 50, nullable: false),
+                    SessionCode = table.Column<string>(maxLength: 10, nullable: true),
+                    PeriodCycle = table.Column<int>(nullable: false),
+                    PeriodYear = table.Column<int>(nullable: false),
+                    Note = table.Column<string>(nullable: true),
+                    UserIdTeacher = table.Column<string>(maxLength: 50, nullable: true),
+                    Credit = table.Column<int>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CareerUserPensum", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CareerUserPensumDetails",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CareerUserPensumId = table.Column<int>(nullable: false),
+                    FirstTest = table.Column<decimal>(nullable: false),
+                    SecondTest = table.Column<decimal>(nullable: false),
+                    Practice = table.Column<decimal>(nullable: false),
+                    FinalTest = table.Column<decimal>(nullable: false),
+                    Total = table.Column<decimal>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CareerUserPensumDetails", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CareerUserTeacherPensum",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(maxLength: 50, nullable: true),
+                    CareerPensumId = table.Column<int>(nullable: false),
+                    SessionCode = table.Column<string>(maxLength: 10, nullable: true),
+                    PeriodCycle = table.Column<int>(nullable: false),
+                    PeriodYear = table.Column<int>(nullable: false),
+                    ClassRoom = table.Column<string>(maxLength: 20, nullable: true),
+                    Day = table.Column<int>(nullable: false),
+                    TimeToIn = table.Column<DateTime>(nullable: false),
+                    TimeToOut = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CareerUserTeacherPensum", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Company",
                 columns: table => new
                 {
@@ -97,6 +195,24 @@ namespace UnicdaPlatform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Complaints",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    Comment = table.Column<string>(nullable: true),
+                    UserResponseId = table.Column<string>(nullable: true),
+                    ResponseComment = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Complaints", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "GroupPermission",
                 columns: table => new
                 {
@@ -109,6 +225,24 @@ namespace UnicdaPlatform.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_GroupPermission", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Matter",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<string>(maxLength: 50, nullable: true),
+                    MatterId = table.Column<string>(maxLength: 20, nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    PreMatterId = table.Column<string>(maxLength: 20, nullable: true),
+                    Credit = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Matter", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -194,6 +328,46 @@ namespace UnicdaPlatform.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "RequestUserChangeCareer",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    Comment = table.Column<string>(nullable: true),
+                    UserResponseId = table.Column<string>(nullable: true),
+                    ResponseComment = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestUserChangeCareer", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "RequestUserMatter",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(nullable: true),
+                    CareerPensumId = table.Column<string>(nullable: true),
+                    SessionCode = table.Column<string>(nullable: true),
+                    PeriodCycle = table.Column<int>(nullable: false),
+                    PeriodYear = table.Column<int>(nullable: false),
+                    Comment = table.Column<string>(nullable: true),
+                    UserResponseId = table.Column<string>(nullable: true),
+                    ResponseComment = table.Column<string>(nullable: true),
+                    Status = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_RequestUserMatter", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Transaction",
                 columns: table => new
                 {
@@ -254,7 +428,7 @@ namespace UnicdaPlatform.Migrations
                     LastName = table.Column<string>(maxLength: 50, nullable: false),
                     Address = table.Column<string>(maxLength: 300, nullable: true),
                     Gender = table.Column<int>(nullable: false),
-                    CareerId = table.Column<int>(nullable: false),
+                    CareerId = table.Column<string>(maxLength: 36, nullable: true),
                     VatNumber = table.Column<string>(nullable: true),
                     Email = table.Column<string>(maxLength: 100, nullable: false),
                     Phone = table.Column<string>(maxLength: 30, nullable: false),
@@ -280,6 +454,22 @@ namespace UnicdaPlatform.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_UserGroup", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "UserMatter",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CompanyId = table.Column<string>(maxLength: 50, nullable: true),
+                    UserId = table.Column<string>(maxLength: 50, nullable: true),
+                    CareerPensumId = table.Column<int>(nullable: false),
+                    Deleted = table.Column<bool>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_UserMatter", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -433,13 +623,48 @@ namespace UnicdaPlatform.Migrations
                 column: "Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Career_Id",
+                table: "Career",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CareerPensum_Id",
+                table: "CareerPensum",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CareerUserPensum_Id",
+                table: "CareerUserPensum",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CareerUserPensumDetails_Id",
+                table: "CareerUserPensumDetails",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CareerUserTeacherPensum_Id",
+                table: "CareerUserTeacherPensum",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Company_Id",
                 table: "Company",
                 column: "Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Complaints_Id",
+                table: "Complaints",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_GroupPermission_Id",
                 table: "GroupPermission",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Matter_Id",
+                table: "Matter",
                 column: "Id");
 
             migrationBuilder.CreateIndex(
@@ -463,6 +688,16 @@ namespace UnicdaPlatform.Migrations
                 column: "Id");
 
             migrationBuilder.CreateIndex(
+                name: "IX_RequestUserChangeCareer_Id",
+                table: "RequestUserChangeCareer",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_RequestUserMatter_Id",
+                table: "RequestUserMatter",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Transaction_Id",
                 table: "Transaction",
                 column: "Id");
@@ -480,6 +715,11 @@ namespace UnicdaPlatform.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_UserGroup_Id",
                 table: "UserGroup",
+                column: "Id");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_UserMatter_Id",
+                table: "UserMatter",
                 column: "Id");
         }
 
@@ -504,10 +744,31 @@ namespace UnicdaPlatform.Migrations
                 name: "Batch");
 
             migrationBuilder.DropTable(
+                name: "Career");
+
+            migrationBuilder.DropTable(
+                name: "CareerPensum");
+
+            migrationBuilder.DropTable(
+                name: "CareerUserPensum");
+
+            migrationBuilder.DropTable(
+                name: "CareerUserPensumDetails");
+
+            migrationBuilder.DropTable(
+                name: "CareerUserTeacherPensum");
+
+            migrationBuilder.DropTable(
                 name: "Company");
 
             migrationBuilder.DropTable(
+                name: "Complaints");
+
+            migrationBuilder.DropTable(
                 name: "GroupPermission");
+
+            migrationBuilder.DropTable(
+                name: "Matter");
 
             migrationBuilder.DropTable(
                 name: "NcfHistory");
@@ -522,6 +783,12 @@ namespace UnicdaPlatform.Migrations
                 name: "Permission");
 
             migrationBuilder.DropTable(
+                name: "RequestUserChangeCareer");
+
+            migrationBuilder.DropTable(
+                name: "RequestUserMatter");
+
+            migrationBuilder.DropTable(
                 name: "Transaction");
 
             migrationBuilder.DropTable(
@@ -532,6 +799,9 @@ namespace UnicdaPlatform.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserGroup");
+
+            migrationBuilder.DropTable(
+                name: "UserMatter");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

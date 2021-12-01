@@ -13,13 +13,13 @@ using UnicdaPlatform.Models.User;
 
 namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Users
 {
-    public class UserDetailsModel : BasePage
+    public class StudentDetailsModel : BasePage
     {
         private readonly UserManager<IdentityUser> _userManager;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ApplicationDbContext _context;
 
-        public UserDetailsModel(
+        public StudentDetailsModel(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
             ApplicationDbContext context)
@@ -32,11 +32,11 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Users
         private UserMainController _user = new UserMainController();
         private UserController _users = new UserController();
         public List<User> users { get; set; }
-        public string Header = "Usuarios";
+        public string Header = "Estudiante";
         private async Task LoadAsync(IdentityUser user)
         {
 
-            users = _users.GetList(_context).Where(a => a.GroupId != 3).ToList();
+            users = _users.GetList(_context).Where(a => a.GroupId == 3).ToList();
         }
 
         public async Task<IActionResult> OnGetAsync()

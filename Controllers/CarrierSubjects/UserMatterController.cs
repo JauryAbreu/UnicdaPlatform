@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnicdaPlatform.Data;
-using UnicdaPlatform.Models.CarrierSubjects;
+using UnicdaPlatform.Models.CareerSubjects;
 
-namespace UnicdaPlatform.Controllers.CarrierSubject
+namespace UnicdaPlatform.Controllers.CareerSubject
 {
     public class UserMatterController
     {
@@ -36,7 +36,7 @@ namespace UnicdaPlatform.Controllers.CarrierSubject
             }
         }
 
-        public object Get(ApplicationDbContext context, string CareerId, string CareerPensumId)
+        public object Get(ApplicationDbContext context, string CareerId, int CareerPensumId)
         {
             try
             {

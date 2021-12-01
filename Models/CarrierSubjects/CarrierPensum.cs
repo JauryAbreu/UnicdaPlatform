@@ -1,14 +1,12 @@
-﻿namespace UnicdaPlatform.Models.CarrierSubjects
+﻿namespace UnicdaPlatform.Models.CareerSubjects
 {
-    public class CarrierPensum
+    public class CareerPensum
     {
         public int Id { get; set; }
         public string CompanyId { get; set; }
         public string CareerId { get; set; }
-        public string CareerPensumId { get; set; }
-        public string Description { get; set; }
-        public string PreCareerPensumId { get; set; }
-        public int Credit { get; set; }
+        public string MatterId { get; set; }
+        public int Period { get; set; }
         public bool Deleted { get; set; }
     }
 }

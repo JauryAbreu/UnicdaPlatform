@@ -35,5 +35,7 @@ namespace UnicdaPlatform.Models.Company
         public string EmailSMTP { get; set; } = "";
         public string PasswordSMTP { get; set; } = "";
         public bool Deleted { get; set; } = false;
+
+        
     }
 }

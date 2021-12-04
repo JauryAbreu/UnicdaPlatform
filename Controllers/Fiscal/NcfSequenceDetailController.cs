@@ -124,8 +124,6 @@ namespace UnicdaPlatform.Controllers.Fiscal
                 Console.WriteLine(ex.Message);
                 return new NcfSequenceDetail();
             }
-
-
         }
 
         public string ValidateNCFSequence(ApplicationDbContext context, string companyId, int ncfId)

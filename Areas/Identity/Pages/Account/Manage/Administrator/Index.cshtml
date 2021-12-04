@@ -24,7 +24,7 @@
                                 <div class="text-xs text-white font-weight-bold  text-uppercase mb-1">
                                     Materias en Curso
                                 </div>
-                                <div class="h5 text-gray-100"> @Model.ProfitAmount.ToString("###,###,##0")</div>
+                                <div class="h5 text-gray-100"> @Model.MatterInProgress.ToString("###,###,##0")</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-book fa-2x text-white"></i>
@@ -49,7 +49,7 @@
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-1">
                                    Materias Pendientes
                                 </div>
-                                <div class="h5 text-gray-100"> @Model.TotalSales.ToString("###,###,##0")</div>
+                                <div class="h5 text-gray-100"> @Model.MatterPending.ToString("###,###,##0")</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-user-graduate fa-2x text-white"></i>
@@ -73,7 +73,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-1">Total de Materias</div>
-                                <div class="h5 font-weight-bold text-gray-100">@Model.CarAvailable.ToString("###,###,##0")</div>
+                                <div class="h5 font-weight-bold text-gray-100">@Model.MatterTotal.ToString("###,###,##0")</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-graduation-cap fa-2x text-white"></i>
@@ -95,7 +95,7 @@
                         <div class="row no-gutters align-items-center">
                             <div class="col mr-2">
                                 <div class="text-xs font-weight-bold text-white text-uppercase mb-1"> Promedio Acumulado </div>
-                                <div class="h5 font-weight-bold text-gray-100">@Model.CarExpiration.ToString("##0.00")</div>
+                                <div class="h5 font-weight-bold text-gray-100">@Model.Average.ToString("##0.00")</div>
                             </div>
                             <div class="col-auto">
                                 <i class="fas fa-archive fa-2x text-white"></i>
@@ -113,23 +113,8 @@
         </div>
         <!-- Content Row -->
         <div class="row">
-            <!-- Pie Chart -->
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Dropdown -->
-                    <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
-                        <h6 class="m-0 font-weight-bold text-black"> Creditos Cursados</h6>
-                    </div>
-                    <!-- Card Body -->
-                    <div class="card-body">
-                        <div class="chart-container" style="position: relative" ;>
-                            <canvas id="donut-chart-canvas"></canvas>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
 
                 <!-- Project Card Example -->
                 <div class="card shadow mb-4">
@@ -137,24 +122,46 @@
                         <h6 class="m-0 font-weight-bold text-info">Materias en Curso</h6>
                     </div>
                     <div class="">
-                        <div class="card-body tabla-dash-2">
-                            <div class="table-responsive tabla-top-2">
+                        <div class="card-body">
+                            <div class="table-responsive">
                                 @using (Html.BeginForm())
                                 {
-                                    <table class="table" id="dataTable" width="100%" cellspacing="0"
-                                            data-order='[[ 3, "desc" ]]' data-page-length='5'>
-                                        <thead>
-                                            <tr>
-                                                <th>Codigo</th>
-                                                <th>Materia</th>
-                                                <th>Creditos</th>
-                                                <th>Profesor</th>
-                                                @*<th></th>*@
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                        </tbody>
-                                    </table>
+                                <table class="table" id="dataTable" width="100%" cellspacing="0"
+                                       data-order='[[ 3, "desc" ]]' data-page-length='5'>
+                                    <thead>
+                                        <tr>
+                                            <th>Codigo</th>
+                                            <th>Materia</th>
+                                            <th>Creditos</th>
+                                            <th>1er Parcial</th>
+                                            <th>2do Parcial</th>
+                                            <th>Practica</th>
+                                            <th>Examen Final</th>
+                                            <th>Total</th>
+                                            <th>Profesor</th>
+                                        </tr>
+                                    </thead>
+
+
+                                    @if (Model.matterInProgress.Count > 0)
+                                    {
+
+                                        @foreach (var term in Model.matterInProgress)
+                                        {
+                                            <tbody>
+                                            <td>@Html.DisplayFor(IndexModel => term.MatterId)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.Description)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.Credit)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.FirstTest)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.SecondTest)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.Practice)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.FinalTest)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.Total)</td>
+                                            <td>@Html.DisplayFor(IndexModel => term.Teacher_Name)</td>
+                                            </tbody>
+                                        }
+                                    }
+                                </table>
                                 }
                             </div>
                         </div>

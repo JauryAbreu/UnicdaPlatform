@@ -4,8 +4,8 @@
     {
         public int Id { get; set; }
         public string UserId { get; set; }
-        public string CareerPensumId { get; set; }
-        public string SessionCode { get; set; }
+        public int CareerPensumId { get; set; }
+        public int SessionCode { get; set; }
         public int PeriodCycle { get; set; }
         public int PeriodYear { get; set; }
         public string Comment { get; set; }

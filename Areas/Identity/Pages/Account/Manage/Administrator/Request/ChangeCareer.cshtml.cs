@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -36,12 +37,9 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
         public InputModel Input { get; set; }
         public class InputModel : RequestUserChangeCareer { };
         public string Header = "Cambio de Carrera";
-        private async Task LoadAsync(int id, string userId)
+        private async Task LoadAsync(int id)
         {
             request = (id > 0) ?(RequestUserChangeCareer)_request.Get(_context, id) : new RequestUserChangeCareer();
-
-            if (!string.IsNullOrEmpty(userId))
-                requestList = _request.GetList(_context, userId);
 
             if (Input == null)
             {
@@ -77,7 +75,11 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
             Username = permission.Item2;  Picture = permission.Item3; CompanyName = permission.Item5;
             #endregion
 
-            await LoadAsync(id, userId);
+            await LoadAsync(id);
+
+            if(validateChangeCareer())
+                return RedirectToPage("Index");
+
             return Page();
         }
 
@@ -101,9 +103,9 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
             {
                 try
                 {
-                    if (string.IsNullOrEmpty(Input.UserId) || string.IsNullOrEmpty(Input.Comment))
+                    if (string.IsNullOrEmpty(Input.Comment))
                     {
-                        Notify(Header, "Cod. Usuario o Comentario no pueden estar vacio.", Models.Enum.NotificationType.warning);
+                        Notify(Header, "Comentario no pueden estar vacio.", Models.Enum.NotificationType.warning);
                         await OnGetAsync(Input.Id, Input.UserId);
                         return Page();
                     }
@@ -111,11 +113,11 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                     var data = new RequestUserChangeCareer();
 
                     data.Id = Input.Id;
-                    data.UserId = Input.UserId;
-                    data.UserResponseId = Input.UserResponseId;
+                    data.UserId = user.Id;
+                    data.UserResponseId = string.Empty;
                     data.Comment = Input.Comment;
-                    data.ResponseComment = Input.ResponseComment;
-                    data.Status = Input.Status;
+                    data.ResponseComment = string.Empty;
+                    data.Status = 1;
                     data.Deleted = false;
 
                     int value = _request.Save(_context, data);
@@ -123,7 +125,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                     if (value <= 0)
                     {
                         Notify(Header, "No se puedo almacenar la informacion del Cambio de Carrera", Models.Enum.NotificationType.warning);
-                        await LoadAsync(Input.Id, Input.UserId);
+                        await LoadAsync(Input.Id);
                         return Page();
                     }
                 }
@@ -139,6 +141,19 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                 return RedirectToPage("Index");
             }
 
+        }
+
+        private bool validateChangeCareer() 
+        {
+            var user = _userManager.GetUserAsync(User).Result;
+            requestList = _request.GetList(_context, user.Id).Where(a => a.Status == 1).ToList();
+
+            if (requestList.Count > 0)
+            {
+                Notify(Header, "Tiene una solicitud de cambio de Carrera pendiente", Models.Enum.NotificationType.warning);
+                return true;
+            }
+            return false;
         }
     }
 }

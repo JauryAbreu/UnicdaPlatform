@@ -20,6 +20,10 @@ namespace UnicdaPlatform.Data
         public DbSet<CareerUserTeacherPensum> CareerUserTeacherPensum { get; set; }
         public DbSet<Matter> Matter { get; set; }
         public DbSet<UserMatter> UserMatter { get; set; }
+        public DbSet<MatterToRemove> MatterToRemove { get; set; }
+        
+
+        public DbSet<MatterInProgress> MatterInProgress { get; set; }
         #endregion
 
         #region Request
@@ -88,5 +92,6 @@ namespace UnicdaPlatform.Data
 
             
         }
+        public DbSet<UnicdaPlatform.Models.CareerSubjects.ApiMatterData> ApiMatterData { get; set; }
     }
 }

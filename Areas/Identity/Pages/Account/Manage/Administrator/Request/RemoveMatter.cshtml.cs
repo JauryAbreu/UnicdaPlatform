@@ -1,11 +1,14 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using UnicdaPlatform.Controllers.CareerSubject;
 using UnicdaPlatform.Controllers.Request;
 using UnicdaPlatform.Controllers.Users;
 using UnicdaPlatform.Data;
+using UnicdaPlatform.Models.CareerSubjects;
 using UnicdaPlatform.Models.Request;
 using UnicdaPlatform.Models.User;
 
@@ -29,45 +32,55 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
         public string Username { get; set; } public string Picture { get; set; } public string CompanyName { get; set; }
         private UserMainController _user = new UserMainController();
         private RequestUserMatterController _request = new RequestUserMatterController();
-        public List<RequestUserMatter> requestList = new List<RequestUserMatter>();
-        public RequestUserMatter request { get; set; }
 
+        UserMatterController _UserMatterController = new UserMatterController();
+        public List<MatterInProgress> requestList = new List<MatterInProgress>();
         [BindProperty]
         public InputModel Input { get; set; }
         public class InputModel : RequestUserMatter 
         {
             public string Description { get; set; }
+            public string MatterId { get; set; }
         };
         public string Header = "Retiro de Materia";
         private async Task LoadAsync(int id, string userId)
         {
-            request = (id > 0) ?(RequestUserMatter)_request.Get(_context, id) : new RequestUserMatter();
 
-            if (!string.IsNullOrEmpty(userId))
-                requestList = _request.GetList(_context, userId);
+            int period = _UserMatterController.GetCurrentPeriod();
+            var matterInProgress = _UserMatterController.GetMatterInProgress(_context, userId, 1);
+            var availableMatterToRemove = _UserMatterController.GetAvailableMatterToRemove(_context, userId);
 
+            foreach (var item in matterInProgress)
+            {
+                if (!availableMatterToRemove.Exists(a => a.MatterId == item.MatterId && a.PeriodCycle == period && a.PeriodYear == DateTime.Now.Year))
+                {
+                    item.Description = string.Format("({0}) {1}", item.MatterId, item.Description);
+                    requestList.Add(item);
+                }
+            }
+        
             if (Input == null)
             {
                 Input = new InputModel()
                 {
-                    Id = request.Id,
-                    UserId = request.UserId,
-                    SessionCode = request.SessionCode,
-                    PeriodCycle = 2021,
-                    PeriodYear = 3,
-                    CareerPensumId = request.CareerPensumId,
-                    Comment = request.Comment,
-                    ResponseComment = request.ResponseComment,
-                    UserResponseId = request.UserResponseId,
+                    Id = 0,
+                    UserId = userId,
+                    SessionCode = 1,
+                    PeriodCycle = period,
+                    PeriodYear = DateTime.Now.Year,
+                    CareerPensumId = requestList.First().CareerPensumId,
+                    Comment = string.Empty,
+                    ResponseComment = string.Empty,
+                    UserResponseId = string.Empty,
                     Description = string.Empty,
-                    Status = request.Status,
-                    Deleted = request.Deleted
+                    Status = 1,
+                    Deleted = false
                 };
             }
         }
         public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id, string userId)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -85,7 +98,8 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
             Username = permission.Item2;  Picture = permission.Item3; CompanyName = permission.Item5;
             #endregion
 
-            await LoadAsync(id, userId);
+            User _userData = _context.User.First(a => a.MasterId == user.Id);
+            await LoadAsync(id, _userData.UserId);
             return Page();
         }
 
@@ -102,7 +116,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
             if (!ModelState.IsValid)
             {
                 Notify(string.Format(Header, "Posee {0} campos con datos sin completar..."), ModelState.ErrorCount.ToString(), Models.Enum.NotificationType.warning);
-                await OnGetAsync(Input.Id, Input.UserId);
+                await OnGetAsync(Input.Id);
                 return Page();
             }
             else
@@ -112,22 +126,27 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                     if (string.IsNullOrEmpty(Input.UserId) || string.IsNullOrEmpty(Input.Comment))
                     {
                         Notify(Header, "Cod. Usuario o Comentario no pueden estar vacio.", Models.Enum.NotificationType.warning);
-                        await OnGetAsync(Input.Id, Input.UserId);
+                        await OnGetAsync(Input.Id);
                         return Page();
                     }
 
                     var data = new RequestUserMatter();
 
+                    User _userData = _context.User.First(a => a.MasterId == user.Id);
+                    var matterInProgress = _UserMatterController.GetMatterInProgress(_context, _userData.UserId, 1);
+
+
+
                     data.Id = Input.Id;
-                    data.UserId = Input.UserId;
-                    data.Status = Input.Status;
-                    data.PeriodYear = Input.PeriodYear;
-                    data.PeriodCycle = Input.PeriodCycle;
-                    data.SessionCode = Input.SessionCode;
+                    data.UserId = user.Id;
+                    data.PeriodYear = DateTime.Now.Year;
+                    data.PeriodCycle = new UserMatterController().GetCurrentPeriod();
+                    data.SessionCode = 1;
+                    data.CareerPensumId = Input.CareerPensumId;
                     data.Comment = Input.Comment;
-                    data.UserResponseId = Input.UserResponseId;
-                    data.ResponseComment = Input.ResponseComment;
-                    data.Status = Input.Status;
+                    data.UserResponseId = string.Empty;
+                    data.ResponseComment = string.Empty;
+                    data.Status = 1;
                     data.Deleted = false;
 
                     int value = _request.Save(_context, data);
@@ -142,7 +161,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                 catch (Exception ex)
                 {
                     Notify(Header, ex.Message, Models.Enum.NotificationType.error);
-                    await OnGetAsync(Input.Id, Input.UserId);
+                    await OnGetAsync(Input.Id);
                     return Page();
                 }
 

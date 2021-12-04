@@ -4,6 +4,7 @@ using System.Linq;
 using UnicdaPlatform.Controllers.Inteface;
 using UnicdaPlatform.Data;
 using UnicdaPlatform.Models;
+using UnicdaPlatform.Models.User;
 
 namespace UnicdaPlatform.Controllers.Transactions
 {
@@ -110,6 +111,25 @@ namespace UnicdaPlatform.Controllers.Transactions
             return new List<Models.Trans.Transactions>();
             
         }
+
+
+        public Tuple<int, int> GetPastelData(ApplicationDbContext context, string UserId)
+        {
+            try
+            {
+                User user = context.User.First(a => a.MasterId == UserId);
+                int credit = context.CareerUserPensum.Where(a => a.UserId == user.MasterId).Sum(a => a.Credit);
+                int totalCredit = context.Matter.Where(a => a.MatterId == context.CareerPensum.First(a => a.CareerId == user.CareerId).MatterId).Sum(a => a.Credit);
+
+                return Tuple.Create(credit, totalCredit);
+            }
+            catch (Exception ex)
+            {
+                TXTSaveLog.WriteToTxtFile(ex.Message);
+                return Tuple.Create(0, 0);
+            }
+        }
+
     }
 }
 

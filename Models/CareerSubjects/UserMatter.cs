@@ -10,4 +10,6 @@
         public int CareerPensumId { get; set; }
         public bool Deleted { get; set; }
     }
+
+
 }

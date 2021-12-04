@@ -37,26 +37,27 @@
                                         <span asp-validation-for="Input.UserId" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="">Codigo Sesion</label>
-                                        <select class="form-select" asp-for="Input.SessionCode" aria-label="">
-                                            <option value="2">INC-500 Proyecto Integrador II</option>
-                                            <option value="0">MAT-132 Algebra Lineal</option>
-                                            <option value="1">IDS-301 Modelos Evolutivos</option>
-                                            <option value="3">IDS-322 Desarrollo Web I</option>
-                                        </select>
-                                    </div>
-                                </div>
                                 <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                        <label for="">Periodo</label>
-                                        <input asp-for="Input.PeriodYear" type="text" placeholder="2021"
+                                        <label for="">Materia</label>
+                                        <div class="form-group">
+                                            <select class="form-select" id="CareerPensumId"
+                                                    asp-items="@(new SelectList(Model.requestList,"CareerPensumId","Description"))"
+                                                    asp-for="Input.CareerPensumId">
+                                                <option selected>Seleccionar Materia</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+                                    <div class="form-group">
+                                        <label for="">Codigo de Sesion</label>
+                                        <input asp-for="Input.SessionCode" type="text" placeholder="INC-500"
                                                class="form-control" id="" autocomplete="off" required readonly>
-                                        <span asp-validation-for="Input.PeriodYear" class="text-danger"></span>
+                                        <span asp-validation-for="Input.SessionCode" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="form-group">
                                         <label for="">Ciclo</label>
                                         <input asp-for="Input.PeriodCycle" type="text" placeholder="Cuatrimetre 3"
@@ -64,22 +65,16 @@
                                         <span asp-validation-for="Input.PeriodCycle" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
+
+                                <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                                     <div class="form-group">
-                                        <label for="">Codigo Materia</label>
-                                        <input asp-for="Input.SessionCode" type="text" placeholder="INC-500"
+                                        <label for="">Periodo</label>
+                                        <input asp-for="Input.PeriodYear" type="text" placeholder="2021"
                                                class="form-control" id="" autocomplete="off" required readonly>
-                                        <span asp-validation-for="Input.SessionCode" class="text-danger"></span>
+                                        <span asp-validation-for="Input.PeriodYear" class="text-danger"></span>
                                     </div>
                                 </div>
-                                <div class="col-lg-6 col-md-6 col-sm-12 col-xs-12">
-                                    <div class="form-group">
-                                        <label for="">Materia</label>
-                                        <input asp-for="Input.Description" type="text" placeholder="Proyecto Integrador II"
-                                               class="form-control" id="" autocomplete="off" required readonly>
-                                        <span asp-validation-for="Input.Description" class="text-danger"></span>
-                                    </div>
-                                </div>
+
 
                                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                                     <div class="form-group">

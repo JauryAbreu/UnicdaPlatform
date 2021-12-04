@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +31,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
         private UserMainController _user = new UserMainController();
         private ComplaintsController _request = new ComplaintsController();
         public List<Complaints> requestList = new List<Complaints>();
-        public Complaints request { get; set; }
+        public Complaints request = new Complaints();
 
         [BindProperty]
         public InputModel Input { get; set; }
@@ -38,17 +39,13 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
         public string Header = "Quejas";
         private async Task LoadAsync(int id, string userId)
         {
-            request = (id > 0) ?(Complaints)_request.Get(_context, id) : new Complaints();
-
-            if (!string.IsNullOrEmpty(userId))
-                requestList = _request.GetList(_context, userId);
 
             if (Input == null)
             {
                 Input = new InputModel()
                 {
                     Id = request.Id,
-                    UserId = request.UserId,
+                    UserId = userId,
                     Comment = request.Comment,
                     ResponseComment = request.ResponseComment,
                     UserResponseId = request.UserResponseId,
@@ -59,7 +56,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
         }
         public string ErrorMessage { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int id, string userId)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -76,8 +73,8 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
 
             Username = permission.Item2;  Picture = permission.Item3; CompanyName = permission.Item5;
             #endregion
-
-            await LoadAsync(id, userId);
+            User _userData = _context.User.First(a => a.MasterId == user.Id);
+            await LoadAsync(id, _userData.UserId);
             return Page();
         }
 
@@ -94,7 +91,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
             if (!ModelState.IsValid)
             {
                 Notify(string.Format(Header, "Posee {0} campos con datos sin completar..."), ModelState.ErrorCount.ToString(), Models.Enum.NotificationType.warning);
-                await OnGetAsync(Input.Id, Input.UserId);
+                await OnGetAsync(Input.Id);
                 return Page();
             }
             else
@@ -104,17 +101,17 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                     if (string.IsNullOrEmpty(Input.UserId) || string.IsNullOrEmpty(Input.Comment))
                     {
                         Notify(Header, "Cod. Usuario o Comentario no pueden estar vacio.", Models.Enum.NotificationType.warning);
-                        await OnGetAsync(Input.Id, Input.UserId);
+                        await OnGetAsync(Input.Id);
                         return Page();
                     }
 
                     var data = new Complaints();
 
                     data.Id = Input.Id;
-                    data.UserId = Input.UserId;
-                    data.UserResponseId = Input.UserResponseId;
+                    data.UserId = user.Id;
+                    data.UserResponseId = string.Empty;
                     data.Comment = Input.Comment;
-                    data.ResponseComment = Input.ResponseComment;
+                    data.ResponseComment = string.Empty;
                     data.Status = Input.Status;
                     data.Deleted = false;
 
@@ -130,7 +127,7 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator.Reque
                 catch (Exception ex)
                 {
                     Notify(Header, ex.Message, Models.Enum.NotificationType.error);
-                    await OnGetAsync(Input.Id, Input.UserId);
+                    await OnGetAsync(Input.Id);
                     return Page();
                 }
 

@@ -36,7 +36,7 @@ namespace UnicdaPlatform.Controllers.Request
             }
         }
 
-        public object Get(ApplicationDbContext context, string UserId, string CareerPensumId, string SessionCode, int PeriodCycle, int PeriodYear)
+        public object Get(ApplicationDbContext context, string UserId, int CareerPensumId, int SessionCode, int PeriodCycle, int PeriodYear)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace UnicdaPlatform.Controllers.Request
         {
             try
             {
-                return context.RequestUserMatter.Where(a => a.UserId == UserId).ToList();
+                return context.RequestUserMatter.Where(a => a.UserId == UserId && a.Status == 1).ToList();
             }
             catch (Exception ex)
             {

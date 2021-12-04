@@ -8,9 +8,11 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using UnicdaPlatform.Controllers.CareerSubject;
 using UnicdaPlatform.Controllers.Transactions;
 using UnicdaPlatform.Controllers.Users;
 using UnicdaPlatform.Data;
+using UnicdaPlatform.Models.CareerSubjects;
 using UnicdaPlatform.Models.Fiscal;
 using UnicdaPlatform.Models.User;
 
@@ -41,15 +43,11 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator
         public static int Type { get; set; }
         private UserMainController _user = new UserMainController();
         #region Main Data
-        public decimal ProfitAmount = 0;
-        public decimal TotalSales = 0;
-        public decimal CarAvailable = 0;
-        public decimal CarExpiration = 0;
-        public decimal DGIITotalAmount = 0;
-        public decimal DGIINetAmount = 0;
-        public decimal DGIIAmount = 0;
-        public decimal ExpenseAmount = 0;
-        public List<NcfHistory> ncfHistory { get; set; }
+        public decimal MatterInProgress = 0;
+        public decimal MatterPending = 0;
+        public decimal MatterTotal = 0;
+        public decimal Average = 0;
+        public List<MatterInProgress> matterInProgress { get; set; }
         public string Header = "Inicio";
         #endregion
         [BindProperty]
@@ -64,36 +62,32 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator
         {
             try
             {
-
                 var userName = await _userManager.GetUserNameAsync(user);
 
-                if (DateFrom == DateTo)
+                try
                 {
-                    DateTime date = new DateTime(new Controllers.GenericFunctions().GetTimeZone().Year, 1, 1);
-                    ncfHistory = _context.NcfHistory.Where(a => a.CreatedDate >= date).OrderByDescending(a => a.CreatedDate).ToList();
+                    var userData = await _userManager.GetUserAsync(User);
+                    User _user = _context.User.First(a => a.MasterId == userData.Id);
+                    List<CareerUserPensum> careerUserPensums = _context.CareerUserPensum.Where(a => a.UserId == _user.MasterId).ToList();
+                    MatterPending = MatterInProgress - MatterTotal;
 
-                    Input = new InputModel();
-                    DateTo = Input.DateTo = new Controllers.GenericFunctions().GetTimeZone().Date.AddDays(1).AddSeconds(-1);
-                    DateFrom = Input.DateFrom = date;
+                    List<CareerPensum> careerPensums = _context.CareerPensum.Where(a => a.CareerId == _user.CareerId).ToList();
+                    List<Matter> matters = new List<Matter>();
+                    foreach (var item in careerPensums)
+                    {
+                        matters.Add(_context.Matter.First(a => a.MatterId == item.MatterId));
+                    }
 
+                    MatterInProgress = careerUserPensums.Where(a=>a.Status == 1).Count();
+                    MatterTotal = matters.Count();
+                    MatterPending = MatterTotal - careerUserPensums.Where(a => a.Status != 7 || a.Status != 8 || a.Status != 3).Count();
+
+                    matterInProgress = new UserMatterController().GetMatterInProgress(_context, _user.UserId, 1);
                 }
-                else
+                catch (Exception)
                 {
-                    ncfHistory = _context.NcfHistory.Where(a => a.CreatedDate >= DateFrom && a.CreatedDate <= DateTo).OrderByDescending(a => a.CreatedDate).ToList();
-
-                    Input = new InputModel();
-                    Input.DateTo = DateTo.Date.AddDays(1).AddSeconds(-1);
-                    Input.DateFrom = DateFrom.Date;
-                    
                 }
-                Input.Type = Type;
 
-                foreach (var item in ncfHistory)
-                {
-                    DGIIAmount += item.TotalTax;
-                    DGIINetAmount += item.TotalAmount;
-                    DGIITotalAmount += item.TotalAmountWithTax;
-                }
             }
             catch { }
 
@@ -117,37 +111,21 @@ namespace UnicdaPlatform.Areas.Identity.Pages.Account.Manage.Administrator
             CompanyName = permission.Item5;
             #endregion
 
-            DateFrom = from;
-            DateTo = to;
-            Type = type;
             await LoadAsync(user);
             return Page();
         }
 
         public async Task<IActionResult> OnGetGeneralPaymentsAsync()
         {
-            var lines = new List<string>();
 
+            var user = await _userManager.GetUserAsync(User);
+            var pastelData = new TransactionController().GetPastelData(_context, user.Id);
             string[] Values = new string[3];
-            /*string[] Colors = { "#e62f2f", "#DA2F2F","#C22C2C","#B02828","#9B2525","#812121",
-                                "#858796", "#7B7D8A","#676872","#53535A","#424248","#38383D",
-                                "#4982d8", "#477AC7","#3F6CAF","#385D95","#325180","#29446C",
-                                "#2c3763", "#334075","#3D4B83","#42549C","#586AB0","#26325F",
-                                "#dc0402", "#DC0402", "#C10200","#A50200","#820200","#660200",
-                                "#012c63", "#005DD4", "#0052BB","#004398","#003981","#002655" };*/
 
-            int i = 1;
-            int line = lines.Count;
-            Random rnd = new Random();
+            Values[0] += string.Format("{0};{1};", "Creditos Cursados", "Total Creditos");
+            Values[1] += string.Format("{0:0.00};{1:0.00};", pastelData.Item1, pastelData.Item2);
+            Values[2] += string.Format("{0};{1};", "#5389DD","#83838E");
 
-            foreach (var item in lines)
-            {
-               /* Values[0] += (i != line) ? string.Format("{0};", item.Description) : item.Description;
-                Values[1] += (i != line) ? string.Format("{0:0.00};", item.Amount) : string.Format("{0:0.00}", item.Amount);
-                //Values[2] += (i != line) ? string.Format("{0};", Colors[rnd.Next(0, 35)]) : Colors[rnd.Next(0, 35)]);
-                Values[2] += string.Format("{0};", (i == 1) ? "#e62f2f" : "#2c3763");
-                i++;*/
-            }
             return new JsonResult(Values);
         }
 
